@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>GET Movie</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/styles.css">
+
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="../js/angular.min.js" type="text/javascript"></script>
+	<script src="../js/app.js" type="text/javascript"></script>
+  <script src="../js/modal.js" type="text/javascript"></script>
+</head>
+
+<body ng-app="getmovieApp">
+
+	<header class="container">
+		<img class="logo"
+		src="../images/logo/logo.gif"
+		alt="Logo de la aplicaci&oacute;n GET Movie">
+		<h1>Puntea, Comenta y Encuentra tu pel&iacute;cula favorita</h1>
+		<br>
+	</header>
+
+  <nav class="container navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="active navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+          <span class="sr-only">Toggle navigation</span> <span
+            class="icon-bar"></span> <span class="icon-bar"></span> <span
+            class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand"
+          href="#">Home</a>
+      </div>
+
+      <div class="container collapse navbar-collapse"
+        id="bs-example-navbar-collapse-2">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle"
+            data-toggle="dropdown" role="button" aria-expanded="true">Cuenta<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="admCuenta/login.html">Iniciar sesi&oacute;n</a></li>
+              <li><a href="admCuenta/register.html">Registrarse</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+	<section class="container">
+		<div class="row">
+			<div class="col-lg-9">
+
+				<div class="jumbotron">
+					<div class="row">
+						<div class="col-lg-5">
+							<h1>¿No sabes que pel&iacute;cula ver?</h1>
+							<p>GET Movie te ofrece las mejores recomendaciones,
+								s&oacute;lo tienes que escoger el g&eacute;nero, actor o director
+								que m&aacute;s te apasione y GET Movie te mostrar&aacute; una
+								lista de las mejores pel&iacute;culas.</p>
+								<p class="">
+									<a class="btn btn-primary" href="admCuenta/login.html">Inciar	sesi&oacute;n</a>
+									<a class="btn btn-primary" href="admCuenta/singup.html">Registrarse</a>
+								</p>
+							</div>
+							<div class="col-lg-7 col-center">
+								<div id="myCarousel" class="carousel slide" data-ride="carousel">
+									<!-- data-interval="false"-->
+									<!-- Indicators -->
+									<ol class="carousel-indicators">
+										<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+										<li data-target="#myCarousel" data-slide-to="1"></li>
+										<li data-target="#myCarousel" data-slide-to="2"></li>
+										<li data-target="#myCarousel" data-slide-to="3"></li>
+										<li data-target="#myCarousel" data-slide-to="4"></li>
+									</ol>
+
+									<!-- Wrapper for slides -->
+									<div class="carousel-inner" role="listbox">
+										<div class="item active" align="center">
+											<img src="../images/home/1.jpg" alt="¿No sabes que pel&iacute;cula ver?"
+											class="img-responsive">
+										</div>
+										<div class="item" align="center">
+											<img src="../images/home/2.jpg"
+											alt="GET Movie te ofrece las mejores recomendaciones"
+											class="img-responsive">
+										</div>
+										<div class="item" align="center">
+											<img src="../images/home/3.jpg"
+											alt="Imagen que muestra los diferentes g&eacute;neros de una pel&iacute;cula"
+											class="img-responsive">
+										</div>
+										<div class="item" align="center">
+											<img src="../images/home/4.jpg"
+											alt="Puntea pel&iacute;culas y pon tus comentarios"
+											class="img-responsive">
+										</div>
+										<div class="item" align="center">
+											<img src="../images/home/5.jpg"
+											alt="La base de datos de GET Movie se alimenta con las puntaciones y comentarios de los usuarios."
+											class="img-responsive">
+										</div>
+									</div>
+
+									<!-- Left and right controls -->
+									<a class="left carousel-control" href="#myCarousel" role="button"
+									data-slide="prev"> <span
+									class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									<span class="sr-only">Previous</span>
+								</a> <a class="right carousel-control" href="#myCarousel"
+								role="button" data-slide="next"> <span
+								class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	<div>
+		<div class="col-lg-3">
+      <aside>
+      	<div class="list-group">
+          <figcaption>
+            <figure>
+              <img class="publicidad"	src="../images/publicidad/super-nachos-9oct.jpg" alt="Publicidad nachos Supercines">
+            </figure>
+          </figcaption>
+          <figcaption>
+            <figure>
+              <img class="publicidad" src="../images/publicidad/logoocho-300x103.png" alt="Publicidad Ocho y Medio">
+            </figure>
+          </figcaption>
+          <figcaption>
+            <figure>
+              <img class="publicidad" src="../images/publicidad/MULTIs -01.jpg" alt="Publicidad Multicines">
+            </figure>
+          </figcaption>
+      	</div>
+      </aside>
+		</div>
+	</div>
+</div>
+</section>
+
+<footer class="container-fluid">
+	<p>Copyright &copy; Samantha Molina, Andr&eacute;s Samaniego, Stalin Guam&aacute;n</p>
+</footer>
+
+</body>
+</html>

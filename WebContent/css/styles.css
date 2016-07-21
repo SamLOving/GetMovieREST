@@ -1,0 +1,101 @@
+header {
+	text-align: center;
+}
+
+img {
+	text-align: center;
+    display:block;
+    margin:auto;
+}
+
+footer {
+	text-align: center
+}
+
+h1 {
+	font-size: 15px;
+}
+
+aside {
+	display: block;
+}
+
+.logo {
+	width: 200px;
+}
+
+.publicidad {
+	width: 250px;
+	padding-bottom: 20px;
+}
+
+.jumbotron h1, .jumbotron .h1 {
+	font-size: 40px;
+}
+
+.col-center {
+	padding-top: 45px;
+}
+
+.formclass {
+	padding-top: 20px;
+}
+
+.btnclass {
+	padding-bottom: 10px;
+}
+
+.img-portada {
+	display: block;
+	width: 165px;
+	height: 200px;
+}
+
+.img-info-portada {
+	display: block;
+	max-width: 260px;
+	height: 350px;
+	align: center;
+}
+
+.label-info1 {
+	font-size: 15px;
+}
+
+.img-responsive1 {
+	display: block;
+	max-width: 220px;
+	height: 230px;
+}
+
+.img-responsive2 {
+	display: block;
+	max-width: 220px;
+	height: 200px;
+}
+
+.btn-upload {
+	color: #ffffff;
+	background-color: #fcfcfc;
+	border-color: #fcfcfc;
+}
+
+.image-upload > input
+{
+    display: none;
+}
+
+.buttonsHome {
+	margin-top: 6px;
+}
+
+img.img-center {
+	max-width: 200px;
+    height: 235px;
+    display:block;
+    margin:auto;
+}
+
+.msgError {
+	color:red;
+}
