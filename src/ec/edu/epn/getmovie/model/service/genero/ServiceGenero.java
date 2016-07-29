@@ -141,5 +141,4 @@ public class ServiceGenero {
 		emf.close();
 		return listagenero;
 	}
-
 }

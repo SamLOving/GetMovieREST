@@ -57,7 +57,7 @@ public class ServiceProductora {
 	}
 
 	@DELETE
-	@Path("eliminar")
+	@Path("eliminar")	
 	public String eliminarProductora(
 			@QueryParam("idProductora") int idproductora) {
 

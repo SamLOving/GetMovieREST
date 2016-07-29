@@ -3,18 +3,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	Collection<Genero> listaGeneros = (Collection<Genero>) request.getAttribute("listaGenerosParaLaVista");
+	Collection<Genero> listaGeneros = (Collection<Genero>) request
+			.getAttribute("listaGenerosParaLaVista");
 %>
 <jsp:include page="/templates/header.jsp"></jsp:include>
 <section class="container">
-<ul class="breadcrumb">
+	<ul class="breadcrumb">
 		<li><a href="${pageContext.request.contextPath}/home">Home</a>
 		<li><a href="${pageContext.request.contextPath}/genero/home">G&eacute;nero</a></li>
 		<li class="active">Administrar</li>
 	</ul>
 	<div class="row">
 		<div class="col-lg-9">
-			<form class="form-horizontal" id="loginForm" method="get" action="${pageContext.request.contextPath}/genero/administrar" >
+			<form class="form-horizontal" id="loginForm" method="get"
+				action="${pageContext.request.contextPath}/genero/administrar">
 				<fieldset>
 					<legend>Administraci&oacute;n de G&eacute;neros</legend>
 					<div>
@@ -44,15 +46,13 @@
 								</tr>
 							</thead>
 							<%
-								try{
-														for(Genero g: listaGeneros){
+								try {
+									for (Genero g : listaGeneros) {
 							%>
 
 							<tbody>
 								<tr>
-									<td><%=
-											g.getNombregenero()
-										%></td>
+									<td><%=g.getNombregenero()%></td>
 									<td>
 										<form method="get"
 											action="${pageContext.request.contextPath}/genero/modificar">
@@ -73,10 +73,10 @@
 										</form>
 									</td>
 									<td>
-									<form method="get"
+										<form method="get"
 											action="${pageContext.request.contextPath}/genero/info">
-											<button type="submit" class="btn btn-default" value="<%=g.getIdgenero()%>"
-												name="generoInfoDesdeVista">
+											<button type="submit" class="btn btn-default"
+												value="<%=g.getIdgenero()%>" name="generoInfoDesdeVista">
 												<i class="material-icons">&#xE8F4;</i>
 											</button>
 										</form>
@@ -85,9 +85,9 @@
 							</tbody>
 							<%
 								}
-												} catch (Exception e){
-													System.out.println("Error al listar genero");
-												}
+								} catch (Exception e) {
+									System.out.println("Error al listar genero");
+								}
 							%>
 
 						</table>

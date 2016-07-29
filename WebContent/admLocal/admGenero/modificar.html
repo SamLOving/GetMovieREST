@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>GET Movie</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/bootstrap.css">
+        <link rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../css/styles.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+        <script src="../../js/angular.min.js" type="text/javascript"></script>
+        <script src="../../js/app.js" type="text/javascript"></script>
+        <script src="../../js/controllers/admGeneroCtrl.js" type="text/javascript"></script>
+    </head>
+
+    <body ng-app="getmovieApp" ng-controller="controllerGenero">
+
+        <header class="container">
+            <img class="logo" src="../../images/logo/logo.gif" alt="Logo de la aplicaci&oacute;n GET Movie">
+            <h1>Puntea, Comenta y Encuentra tu pel&iacute;cula favorita</h1>
+            <br>
+        </header>
+
+        <nav class="container navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="active navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span> <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Home</a>
+                </div>
+
+                <div class="container collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="../amdPelicula/home.html">Pel&iacute;cula<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li>
+                            <a href="../admGenero/home.html">G&eacute;nero</a>
+                        </li>
+                        <li>
+                            <a href="../admActor/home.html">Actor </a>
+                        </li>
+                        <li>
+                            <a href="../admDirector/home.html">Director</a>
+                        </li>
+                        <li>
+                            <a href="../admProductora/home.html">Productora </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="../admCuenta/home.html">Cuenta</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="container">
+            <ul class="breadcrumb">
+                <li><a href="../homeLogin.html">Home</a>
+                <li><a href="../admGenero/home.html">G&eacute;nero</a></li>
+                <li class="active">Registrar</li>
+            </ul>
+            <div class="row">
+                <div class="col-lg-9">
+                    <form class="form-horizontal" method="put" action="" name="generoRegistrarForm">
+                        <fieldset>
+                            <legend>Modificar G&eacute;nero</legend>
+                            <div class="form-group">
+                                <label for="nombreGenero" class="col-lg-2 col-md-2 control-label">Nombre</label>
+                                <div class="col-lg-10 col-md-10">
+                                    <div class="col-lg-11">
+                                        <input type="text" class="form-control" id="nombreGenero" name="nombreGenero" ng-model="nombreGenero" placeholder="Nombre de G&eacute;nero" pattern=".{0,50}" required>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <span class="msgError" ng-show="generoRegistrarForm.nombreGenero.$error.required">(*)</span>
+                                    </div>
+                                    <div class="col-lg-11">
+                                        <div class="alert alert-dismissible alert-danger" ng-show="generoRegistrarForm.nombreGenero.$error.pattern">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>Error!</strong> El nombre del G&eacute; debe tener un m&aacute; ximo de 50 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="textArea" class="col-lg-2 control-label">Descripci&oacute;n</label>
+                                <div class="col-lg-10 col-md-10">
+                                    <div class="col-lg-11">
+                                        <textarea class="form-control" rows="3" id="textArea"
+                                                  name="descripcionGenero" required pattern=".{0,250}" title="&Uacute;nicamente se admiten 205 caracteres" ng-model="descripcionGenero"></textarea>
+
+                                    </div>
+                                    <div class="col-lg-1">
+
+                                        <span class="msgError" ng-show="generoRegistrarForm.descripcionGenero.$error.required">(*)</span>
+                                    </div>
+                                    <div class="col-lg-11">
+                                        <div class="alert alert-dismissible alert-danger" ng-show="generoRegistrarForm.descripcionGenero.$error.pattern">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>Error!</strong> No puede ingresar m&aacute;s de 250 caracteres.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <button class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="top">Registrar</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="col-lg-3">
+                    <aside>
+                        <div class="list-group">
+                            <figcaption>
+                                <figure>
+                                    <img class="publicidad" src="../../images/publicidad/super-nachos-9oct.jpg" alt="Publicidad nachos Supercines">
+                                </figure>
+                            </figcaption>
+                            <figcaption>    
+                                <figure>
+                                    <img class="publicidad" src="../../images/publicidad/logoocho-300x103.png" alt="Publicidad Ocho y Medio">
+                                </figure>
+                            </figcaption>
+                            <figcaption>
+                                <figure>
+                                    <img class="publicidad" src="../../images/publicidad/MULTIs -01.jpg" alt="Publicidad Multicines">
+                                </figure>
+                            </figcaption>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <footer class="container-fluid">
+            <p>Copyright &copy; Samantha Molina, Andr&eacute;s Samaniego, Stalin Guam&aacute;n</p>
+        </footer>
+
+    </body>
+
+</html>
