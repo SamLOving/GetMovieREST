@@ -1,0 +1,65 @@
+<form class="form-horizontal" method="post" action="login" name="loginForm">
+	<fieldset>
+		<legend>Iniciar sesi&oacute;n</legend>
+
+		<div class="form-group">
+			<label for="inputEmail" class="col-lg-2 control-label">Email</label>
+			<div class="col-lg-10 col-md-10">
+				<div class="col-lg-11">
+					<input type="email" class="form-control" id="inputEmail"
+						name="email" ng-model="usuario.correousr"
+						placeholder="Email" required
+						ng-style="((loginForm.email.$error.email || loginForm.email.$error.required) 
+							&& execLoggin == true) && msgBackgroundError">
+				</div>
+				<div class="col-lg-11">
+					<div class="alert alert-dismissible alert-danger"
+						ng-show="loginForm.email.$error.email && execLoggin == true">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Error!</strong> Ingrese un email v&aacute;lido.
+					</div>
+				</div>
+				<div class="col-lg-11">
+					<div class="alert alert-dismissible alert-danger"
+						ng-show="loginForm.email.$error.required && execLoggin == true">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Error!</strong> Complete este campo.
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="inputPassword" class="col-lg-2 control-label">Contrase&ntilde;a</label>
+			<div class="col-lg-10 col-md-10">
+				<div class="col-lg-11">
+					<input type="password" class="form-control" id="inputPassword"
+						name="password" ng-model="usuario.claveusr"
+						placeholder="Contrase&ntilde;a"
+						ng-style="(loginForm.password.$error.required && execLoggin == true) 
+							&& msgBackgroundError"
+						required>
+				</div>
+				<div class="col-lg-11">
+					<div class="alert alert-dismissible alert-danger"
+						ng-show="loginForm.password.$error.required && execLoggin == true">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Error!</strong> Complete este campo.
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div>
+			<button class="btn btn-primary" type="button" name="name"
+				value="Iniciar sesi&oacute;n" ng-click="loggin()">Iniciar sesi&oacute;n
+			</button>
+		</div>
+	</fieldset>
+</form>
+
+<div class="appMsg">
+	<div uib-alert ng-repeat="alert in alerts"
+		ng-class="'alert-' + (alert.type || 'warning')"
+		close="closeAlert($index)">{{alert.msg}}</div>
+</div>

@@ -8,6 +8,10 @@ img {
     margin:auto;
 }
 
+aside {
+	z-index: -1;
+}
+
 footer {
 	text-align: center
 }
@@ -98,4 +102,15 @@ img.img-center {
 
 .msgError {
 	color:red;
+}
+
+.msgBackgroundError {
+	background-color: #E57373;
+}
+
+.appMsg {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 2;
 }

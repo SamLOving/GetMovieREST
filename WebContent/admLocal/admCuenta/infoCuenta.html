@@ -1,0 +1,29 @@
+<ul class="breadcrumb">
+	<li><a href="#">Home</a>
+	<li><a href="#/Cuenta/home">Cuenta</a></li>
+	<li class="active">Info</li>
+</ul>
+<form class="form-horizontal">
+	<fieldset>
+		<legend>Informaci&oacute;n de Usuario</legend>
+		<div class="form-group">
+			<label for="inputName" class="col-lg-2 control-label">Nombre</label>
+			<div class="col-lg-10">
+				<input type="text" value="{{usuario.nombreusr}}" class="form-control"
+					id="inputName" placeholder="Name" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputEmail" class="col-lg-2 control-label">Email</label>
+			<div class="col-lg-10">
+				<input type="text" value="{{usuario.correousr}}" class="form-control"
+					id="inputEmail" placeholder="Email" readonly>
+			</div>
+		</div>
+	</fieldset>
+</form>
+<div>
+	<a href="${pageContext.request.contextPath}/cuenta/home" type="submit"
+		class="btn btn-primary" data-container="body" data-toggle="popover"
+		data-placement="top">Regresar</a>
+</div>

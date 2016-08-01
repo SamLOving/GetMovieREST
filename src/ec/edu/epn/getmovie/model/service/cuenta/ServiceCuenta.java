@@ -1,14 +1,15 @@
 package ec.edu.epn.getmovie.model.service.cuenta;
 
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,51 +29,62 @@ public class ServiceCuenta {
 	
 	@POST
 	@Path(value="crear")
-	public void crearUsuario(
-			@QueryParam(value="nombre") String nombreusr,
-			@QueryParam(value="email") String correousr,
-			@QueryParam(value="clave") String claveusr,
-			@QueryParam(value="estado") byte estadousr,
-			@QueryParam(value="isAdmin") byte isadmin
-			) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
-		EntityManager em = emf.createEntityManager();
-		
-		Usuario usuario = new Usuario(correousr, claveusr, estadousr, isadmin, nombreusr);
-		em.getTransaction().begin();
-		em.persist(usuario);
-		em.getTransaction().commit();
-		em.close();
+	@Consumes("application/json")
+	public Map<String, String> crearUsuario(Usuario usuario) {
+		Map<String, String> response = new HashMap<String, String>();
+		try {
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(usuario);
+			em.getTransaction().commit();
+			em.close();
+			response.put("success", "Usuario creado existosamente.");
+			return response;
+		} catch (PersistenceException e) {
+			System.out.println(e.getCause());
+			response.put("danger", "El usuario ingresado ya se encuentra registrado.");
+			return response;
+		} catch (Exception e) {
+			response.put("danger", "Ha ocurrido un error al crear usuario.");
+			return response;
+		}
 	}
 
 	@GET
 	@Path(value="buscarByEmail")
 	public Usuario buscarUsuario(
 			@QueryParam(value="email") String email) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
-		EntityManager em = emf.createEntityManager();
-		
-		em.getTransaction().begin();
-		Usuario u = em.find(Usuario.class, email);
-		em.getTransaction().commit();
-		em.close();
-
-		return u;
+		try {
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
+			EntityManager em = emf.createEntityManager();
+			
+			em.getTransaction().begin();
+			Usuario u = em.find(Usuario.class, email);
+			em.getTransaction().commit();
+			em.close();
+			return u;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
-	@GET
+	@POST
 	@Path(value="login")
-	public boolean loggingUsuario(
-			@QueryParam(value="email") String email, 
-			@QueryParam(value="clave") String clave
-			) {
-		Usuario usuario = buscarUsuario(email);
-
-		if (usuario == null) {
-			return false;
-		} else if (clave.equals(usuario.getClaveusr())) {
-			return true;
-		} else {
+	@Consumes("application/json")
+	public boolean loggingUsuario(Usuario usr) {
+		System.out.println(usr.toString());
+		try {
+			Usuario usuario = buscarUsuario(usr.getCorreousr());
+	
+			if (usuario == null) {
+				return false;
+			} else if (usr.getClaveusr().equals(usuario.getClaveusr())) {
+				return true;
+			} else {
+				return false;
+		}
+		} catch (Exception e) {
 			return false;
 		}
 	}
@@ -111,21 +123,26 @@ public class ServiceCuenta {
 	
 	@PUT
 	@Path(value="modificar")
-	public void modificarUsuario(
-			@QueryParam(value="nombre") String nombreusr,
-			@QueryParam(value="email") String correousr,
-			@QueryParam(value="clave") String claveusr
-			) {
+	@Consumes("application/json")
+	public Map<String, String> modificarUsuario(Usuario usuario) {
+		Map<String, String> response = new HashMap<String, String>();
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
 		EntityManager em = emf.createEntityManager();
 		
-		Usuario u = em.getReference(Usuario.class, correousr);
-		u.setNombreusr(nombreusr);
-		u.setClaveusr(claveusr);
-		
-		em.getTransaction().begin();
-		em.persist(u);
-		em.getTransaction().commit();
-		em.close();
+		try {
+			Usuario u = em.getReference(Usuario.class, usuario.getCorreousr());
+			u.setNombreusr(usuario.getNombreusr());
+			u.setClaveusr(usuario.getClaveusr());
+			
+			em.getTransaction().begin();
+			em.persist(u);
+			em.getTransaction().commit();
+			em.close();
+			response.put("success", "Usuario modificado existosamente.");
+			return response;
+		} catch (Exception e) {
+			response.put("danger", "Ha ocurrido un error al crear usuario.");
+			return response;
+		}
 	}
 }

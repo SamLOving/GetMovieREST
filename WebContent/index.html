@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>GET Movie</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/dynamicStyles.css">
+
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="js/angular.min.js" type="text/javascript"></script>
+	<script src="js/angular-route.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+	<script src="js/ui-bootstrap-2.0.0.min.js" type="text/javascript"></script>
+	<script src="js/app.js" type="text/javascript"></script>
+  	<script src="js/modal.js" type="text/javascript"></script>
+  	
+  	<script src="js/controllers/MainController.js" type="text/javascript"></script>
+  	<script src="js/controllers/cuenta/loginCtrl.js" type="text/javascript"></script>
+  	<script src="js/controllers/cuenta/registrarCtrl.js" type="text/javascript"></script>
+  	<script src="js/controllers/cuenta/infoUsrCtrl.js" type="text/javascript"></script>
+  	<script src="js/controllers/cuenta/homeUsrCtrl.js" type="text/javascript"></script>
+  	<script src="js/controllers/cuenta/modificarUsrCtrl.js" type="text/javascript"></script>
+  	
+  	<script src="js/services/admCuentaSrv.js" type="text/javascript"></script>
+</head>
+
+<body ng-app="getmovieApp" ng-controller="MainController">
+
+	<header class="container">
+		<img class="logo"
+		src="images/logo/logo.gif"
+		alt="Logo de la aplicaci&oacute;n GET Movie">
+		<h1>Puntea, Comenta y Encuentra tu pel&iacute;cula favorita</h1>
+		<br>
+	</header>
+
+  <nav class="container navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="active navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span> <span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Home</a>
+			</div>
+
+			<div class="container collapse navbar-collapse"	id="bs-example-navbar-collapse-2">
+				<ul class="nav navbar-nav">
+					<li ng-show="usuario.estadousr == 1">
+						<a href="#Pelicula/home">Pel&iacute;cula<span class="sr-only">(current)</span></a>
+					</li>
+					<li ng-show="usuario.estadousr == 1">
+						<a href="#Genero/home">G&eacute;nero</a>
+					</li>
+					<li ng-show="usuario.estadousr == 1">
+						<a href="#Actor/home">Actor </a>
+					</li>
+					<li ng-show="usuario.estadousr == 1">
+						<a href="#Director/home">Director</a>
+					</li>
+					<li ng-show="usuario.estadousr == 1">
+						<a href="#Productora/home">Productora </a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li ng-show="usuario.estadousr == 1">
+						<a href="#Cuenta/home">Cuenta</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<section class="container">
+		<article>
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="box" ng-view>Floating box</div>
+				</div>
+				<div>
+					<div class="col-lg-3">
+			      		<aside>
+				      		<div class="list-group">
+				          		<figure>
+				          			<img class="publicidad"	src="images/publicidad/super-nachos-9oct.jpg" alt="Publicidad nachos Supercines">
+				          		</figure>
+						        <figure>
+						            <img class="publicidad" src="images/publicidad/logoocho-300x103.png" alt="Publicidad Ocho y Medio">
+						        </figure>
+						        <figure>
+						            <img class="publicidad" src="images/publicidad/MULTIs -01.jpg" alt="Publicidad Multicines">
+						        </figure>
+							</div>
+			      		</aside>
+					</div>
+				</div>
+			</div>
+		</article>	
+	</section>
+
+	<footer class="container-fluid">
+		<p>Copyright &copy; Samantha Molina, Andr&eacute;s Samaniego, Stalin Guam&aacute;n</p>
+	</footer>
+
+</body>
+</html>

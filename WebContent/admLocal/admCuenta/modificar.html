@@ -1,10 +1,12 @@
-<div ng-controller="registrarUsrCtrl">
-	<form class="form-horizontal" id="registrarForm" name="registrarForm"
-		method="post" action="singup">
-		<fieldset>
-			<legend>Registro de Usuario</legend>
-	
-			<div class="form-group">
+<ul class="breadcrumb">
+	<li><a href="#">Home</a>
+	<li><a href="#Cuenta/home">Cuenta</a></li>
+	<li class="active">Modificar</li>
+</ul>
+<form class="form-horizontal" method="post" data-ng-init="init()">
+	<fieldset>
+		<legend>Modificaci&oacute;n de Usuarios</legend>
+		<div class="form-group">
 				<label for="inputName" class="col-lg-2 col-md-2 control-label">Nombre</label>
 				<div class="col-lg-10 col-md-10">
 					<div class="col-lg-11">
@@ -12,7 +14,7 @@
 							name="username" ng-model="usuario.nombreusr" placeholder="Nombre"
 							pattern=".{0,50}" required 
 							ng-style="((registrarForm.username.$error.required || registrarForm.username.$error.pattern) 
-								&& execRegistrar == true) && msgBackgroundError">
+								&& execModificar == true) && msgBackgroundError">
 					</div>
 					<div class="col-lg-1">
 						<span class="msgError" ng-show="registrarForm.username.$error.required">(*)</span>
@@ -37,7 +39,7 @@
 							pattern=".{0,100}" required
 							ng-style="((registrarForm.email.$error.required || registrarForm.email.$error.pattern
 								|| registrarForm.email.$error.email) 
-								&& execRegistrar == true) && msgBackgroundError">
+								&& execModificar == true) && msgBackgroundError" readOnly>
 					</div>
 					<div class="col-lg-1">
 						<span class="msgError" ng-show="registrarForm.email.$error.required">(*)</span>
@@ -68,8 +70,8 @@
 							name="password" ng-model="usuario.claveusr"
 							placeholder="Contrase&ntilde;a" required pattern=".{8,16}"
 							ng-style="((registrarForm.password.$error.required
-								|| registrarForm.password.$error.pattern && execRegistrar) 
-								&& execRegistrar == true) && msgBackgroundError">
+								|| registrarForm.password.$error.pattern && execModificar) 
+								&& execModificar == true) && msgBackgroundError">
 					</div>
 					<div class="col-lg-1">
 						<span class="msgError" ng-show="registrarForm.password.$error.required">(*)</span>
@@ -95,7 +97,7 @@
 							ng-style="((registrarForm.confirmPassword.$error.required
 								|| registrarForm.confirmPassword.$error.pattern
 								|| usuario.claveusr != confirmarClaveUsuario) 
-								&& execRegistrar == true) && msgBackgroundError">
+								&& execModificar == true) && msgBackgroundError">
 					</div>
 					<div class="col-lg-1">
 						<span class="msgError"
@@ -120,14 +122,7 @@
 			</div>
 			<div>
 				<button type="button" class="btn btn-primary" data-container="body"
-					data-toggle="popover" data-placement="top" ng-click="registrarUsr()">Registrar</button>
+					data-toggle="popover" data-placement="top" ng-click="modificarUsr()">Modificar</button>
 			</div>
-		</fieldset>
-	</form>
-	
-	<div class="appMsg">
-		<div uib-alert ng-repeat="alert in alerts"
-			ng-class="'alert-' + (alert.type || 'warning')"
-			close="closeAlert($index)">{{alert.msg}}</div>
-	</div>
-</div>
+	</fieldset>
+</form>
