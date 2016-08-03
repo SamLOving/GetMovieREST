@@ -23,12 +23,36 @@ app.config(function ($routeProvider) {
 	   .when('/Genero/:paramB',  {
                    templateUrl: 'admLocal/admGenero/home.html',
                    controller: 'Controlador2'})
-       .when('/Actor/:paramC',  {
+       .when('/Actor/home',  {
                    templateUrl: 'admLocal/admActor/home.html',
-                   controller: 'Controlador3'})
-       .when('/Director/:paramD',  {
+                   controller: 'homeActorCtrl'})
+        .when('/Actor/registrar',  {
+                   templateUrl: 'admLocal/admActor/registrar.html',
+                   controller: 'crearActorCtrl'})
+        .when('/Actor/modificar/:id',  {
+                   templateUrl: 'admLocal/admActor/modificar.html',
+                   controller: 'modificarActorCtrl'})
+        .when('/Actor/ver/:id',  {
+                   templateUrl: 'admLocal/admActor/infoActor.html',
+                   controller: 'verActorCtrl'})
+        .when('/Actor/administrar',  {
+                   templateUrl: 'admLocal/admActor/administrar.html',
+                   controller: 'controllerActor'})
+       .when('/Director/home',  {
                    templateUrl: 'admLocal/admDirector/home.html',
-                   controller: 'Controlador4'})
+                   controller: 'homeDirectorCtrl'})
+        .when('/Director/registrar',  {
+                   templateUrl: 'admLocal/admDirector/registrar.html',
+                   controller: 'crearDirectorCtrl'})
+        .when('/Director/modificar/:id',  {
+                   templateUrl: 'admLocal/admDirector/modificar.html',
+                   controller: 'modificarDirectorCtrl'})
+        .when('/Director/ver/:id',  {
+                   templateUrl: 'admLocal/admDirector/infoDirector.html',
+                   controller: 'verDirectorCtrl'})
+        .when('/Director/administrar',  {
+                   templateUrl: 'admLocal/admDirector/administrar.html',
+                   controller: 'controllerDirector'})
        .when('/Productora/:paramE',  {
                    templateUrl: 'admLocal/admProductora/home.html',
                    controller: 'Controlador5'})

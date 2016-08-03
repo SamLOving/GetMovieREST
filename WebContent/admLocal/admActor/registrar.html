@@ -1,186 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>GET Movie</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/bootstrap.css">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/styles.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
-    <script src="../../js/angular.min.js" type="text/javascript"></script>
-    <script src="../../js/app.js" type="text/javascript"></script>
-    <script src="../../js/controllers/admActorCtrl.js" type="text/javascript"></script>
-</head>
-
-<body ng-app="getmovieApp" ng-controller="controllerActor">
-
-    <header class="container">
-        <img class="logo" src="../../images/logo/logo.gif" alt="Logo de la aplicaci&oacute;n GET Movie">
-        <h1>Puntea, Comenta y Encuentra tu pel&iacute;cula favorita</h1>
-        <br>
-    </header>
-
-    <nav class="container navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="active navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span> <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Home</a>
-            </div>
-
-            <div class="container collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="../amdPelicula/home.html">Pel&iacute;cula<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li>
-                        <a href="../admGenero/home.html">G&eacute;nero</a>
-                    </li>
-                    <li>
-                        <a href="home.html">Actor </a>
-                    </li>
-                    <li>
-                        <a href="../admDirector/home.html">Director</a>
-                    </li>
-                    <li>
-                        <a href="../admProductora/home.html">Productora </a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="../admCuenta/home.html">Cuenta</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <section class="container">
-       <ul class="breadcrumb">
-            <li><a href="../homeLogin.html">Home</a>
-                <li><a href="home.html">Actor</a></li>
-                <li class="active">Registrar</li>
-        </ul>
-        <div class="row">
-            <div class="col-lg-9">
-                <form class="form-horizontal" method="post" action="" name="actorRegistrarForm">
-                    <fieldset>
-                        <legend>Registro de Actor</legend>
-                        <div class="form-group">
-                            <label for="nombreActor" class="col-lg-2 col-md-2 control-label">Nombre</label>
-                            <div class="col-lg-10 col-md-10">
-                                <div class="col-lg-11">
-                                    <input type="text" class="form-control" id="nombreActor" name="nombreActor" ng-model="nombreActor" placeholder="Nombre Actor" pattern=".{0,50}" required>
-                                </div>
-                                <div class="col-lg-1">
-                                    <span class="msgError" ng-show="actorRegistrarForm.nombreActor.$error.required">(*)</span>
-                                </div>
-                                <div class="col-lg-11">
-                                    <div class="alert alert-dismissible alert-danger" ng-show="actorRegistrarForm.nombreActor.$error.pattern">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong>Error!</strong> El nombre del actor debe tener un m√°ximo de 50 caracteres.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha" class="col-lg-2 control-label">Fecha de nacimiento</label>
-                            <div class="col-lg-10 col-md-10">
-                                <div class="col-lg-11">
-                                    <input type="date" class="form-control" id="fecha" name="fecha" ng-model="fecha" placeholder="yyyy-mm-dd" required>
-                                </div>
-                                <div class="col-lg-1">
-                                    <span class="msgError" ng-show="actorRegistrarForm.fecha.$error.required">(*)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="generoM" class="col-lg-2 control-label">G&eacute;nero</label>
-                            <div class="col-lg-10 col-md-10">
-                                <div class="col-lg-11">
-                                    <div class="radio" >
-                                        <label for="generoM">
-                                            <input type="radio" ng-model="genero" name="genero" id="generoM" value="Masculino" required> Masculino
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label for="GeneroF">
-                                            <input type="radio" ng-model="genero" name="genero" id="GeneroF" value="Femenino" required> Femenino
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-1">
-                                    <span class="msgError" ng-show="actorRegistrarForm.genero.$error.required">(*)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="oscars" class="col-lg-2 control-label">N&uacute;mero de Oscars</label>
-                            <div class="col-lg-10 col-md-10">
-                                <div class="col-lg-11">
-                                    <input type="text" class="form-control" id="oscars" placeholder="Nro de oscars" name="oscars" required pattern="^\d{1,2}$" title="&Uacute;nicamente se admiten n&uacute;meros de hasta 2 d&iacute;gitos" ng-model="oscars"/>
-                                </div>
-                                <div class="col-lg-1">
-
-                                    <span class="msgError" ng-show="actorRegistrarForm.oscars.$error.required">(*)</span>
-                                </div>
-                                <div class="col-lg-11">
-                                    <div class="alert alert-dismissible alert-danger" ng-show="actorRegistrarForm.oscars.$error.pattern">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong>Error!</strong> No puede ingresar un numero mayor a 99.
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="top">Registrar</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div>
-                <div class="col-lg-3">
-                    <aside>
-                        <div class="list-group">
-                            <figcaption>
-                                <figure>
-                                    <img class="publicidad" src="../../images/publicidad/super-nachos-9oct.jpg" alt="Publicidad nachos Supercines">
-                                </figure>
-                            </figcaption>
-                            <figcaption>
-                                <figure>
-                                    <img class="publicidad" src="../../images/publicidad/logoocho-300x103.png" alt="Publicidad Ocho y Medio">
-                                </figure>
-                            </figcaption>
-                            <figcaption>
-                                <figure>
-                                    <img class="publicidad" src="../../images/publicidad/MULTIs -01.jpg" alt="Publicidad Multicines">
-                                </figure>
-                            </figcaption>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="container-fluid">
-        <p>Copyright &copy; Samantha Molina, Andr&eacute;s Samaniego, Stalin Guam&aacute;n</p>
-    </footer>
-
-</body>
-
-</html>
+<ul class="breadcrumb">
+	<li><a href="#/">Home</a>
+	<li><a href="#/Actor/home">Actor</a></li>
+	<li class="active">Registrar</li>
+</ul>
+<form class="form-horizontal" name="actorRegistrarForm">
+	<fieldset>
+		<legend>Registro de Actor</legend>
+		<div class="form-group">
+			<label for="nombreActor" class="col-lg-2 col-md-2 control-label">Nombre</label>
+			<div class="col-lg-10 col-md-10">
+				<div class="col-lg-11">
+					<input type="text" class="form-control" id="nombreActor"
+						name="nombreActor" ng-model="actor.nombreactor"
+						placeholder="Nombre Actor" pattern=".{0,50}" required
+						ng-style="((actorRegistrarForm.nombreActor.$error.required || actorRegistrarForm.nombreActor.$error.pattern) 
+								&& execRegistrar == true) && msgBackgroundError">
+				</div>
+				<div class="col-lg-1">
+					<span class="msgError"
+						ng-show="actorRegistrarForm.nombreActor.$error.required">(*)</span>
+				</div>
+				<div class="col-lg-11">
+					<div class="alert alert-dismissible alert-danger"
+						ng-show="actorRegistrarForm.nombreActor.$error.pattern">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Error!</strong> El nombre del actor debe tener un m·ximo
+						de 50 caracteres.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="fecha" class="col-lg-2 control-label">Fecha de
+				nacimiento</label>
+			<div class="col-lg-10 col-md-10">
+				<div class="col-lg-11">
+					<input type="date" class="form-control" id="fecha" name="fecha"
+						ng-model="actor.nacimiento" placeholder="yyyy-mm-dd" required ng-style="((actorRegistrarForm.fecha.$error.required) 
+								&& execRegistrar == true) && msgBackgroundError">
+				</div>
+				<div class="col-lg-1">
+					<span class="msgError"
+						ng-show="actorRegistrarForm.fecha.$error.required">(*)</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="generoM" class="col-lg-2 control-label">G&eacute;nero</label>
+			<div class="col-lg-10 col-md-10">
+				<div class="col-lg-11">
+					<div class="radio">
+						<label for="generoM"> <input type="radio"
+							ng-model="actor.genero" name="genero" id="generoM"
+							value="Masculino" required ng-style="((actorRegistrarForm.genero.$error.required) 
+								&& execRegistrar == true) && msgBackgroundError"> Masculino
+						</label>
+					</div>
+					<div class="radio">
+						<label for="GeneroF"> <input type="radio"
+							ng-model="actor.genero" name="genero" id="GeneroF"
+							value="Femenino" required ng-style="((actorRegistrarForm.genero.$error.required) 
+								&& execRegistrar == true) && msgBackgroundError"> Femenino
+						</label>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<span class="msgError"
+						ng-show="actorRegistrarForm.genero.$error.required">(*)</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="oscars" class="col-lg-2 control-label">N&uacute;mero
+				de Oscars</label>
+			<div class="col-lg-10 col-md-10">
+				<div class="col-lg-11">
+					<input type="number" class="form-control" id="oscars"
+						placeholder="Nro de oscars" name="oscars" required
+						pattern="^\d{1,2}$"
+						title="&Uacute;nicamente se admiten n&uacute;meros de hasta 2 d&iacute;gitos"
+						ng-model="actor.oscars" min="0" max="30" ng-style="((actorRegistrarForm.oscars.$error.required || actorRegistrarForm.oscars.$error.min || actorRegistrarForm.oscars.$error.max) 
+								&& execRegistrar == true) && msgBackgroundError"/>
+				</div>
+				<div class="col-lg-1">
+					<span class="msgError"
+						ng-show="actorRegistrarForm.oscars.$error.required">(*)</span>
+				</div>
+				<div class="col-lg-11">
+					<div class="alert alert-dismissible alert-danger"
+						ng-show="actorRegistrarForm.oscars.$error.min">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Error!</strong> No puede ingresar un numero menor a 0.
+					</div>
+				</div>
+				<div class="col-lg-11">
+					<div class="alert alert-dismissible alert-danger"
+						ng-show="actorRegistrarForm.oscars.$error.max">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Error!</strong> No puede ingresar un numero mayor a 30.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<button type="button" ng-click="crear()" class="btn btn-primary"
+				data-container="body" data-toggle="popover" data-placement="top">Registrar</button>
+		</div>
+	</fieldset>
+</form>
+<div class="appMsg">
+	<div uib-alert ng-repeat="alert in alerts"
+		ng-class="'alert-' + (alert.type || 'warning')"
+		close="closeAlert($index)">{{alert.msg}}</div>
+</div>

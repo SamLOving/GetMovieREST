@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,9 +19,10 @@ import ec.edu.epn.getmovie.model.Actor;
 @Path("actor")
 @Produces("application/json")
 public class ServiceActor {
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieREST");
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
 	@GET
 	@Path("buscar")
+	@Consumes("application/json")
 	public Actor buscarActor(@QueryParam("id")int idActor) {
 		String mensaje="";
 		Actor actor = new Actor();
@@ -40,21 +42,12 @@ public class ServiceActor {
 	}
 	@POST
 	@Path("crear")
-	public String crearActor(
-			@QueryParam("nombre")String nombre,
-			@QueryParam("genero")String genero,
-			@QueryParam("nacimiento")String nacimiento,
-			@QueryParam("oscars")int oscar
-			) {
+	@Consumes("application/json")
+	public void crearActor(Actor a) {
 		try{
 			EntityManager em = emf.createEntityManager();
-			Actor actor = new Actor();
-			actor.setNombreactor(nombre);
-			actor.setGenero(genero);
-			actor.setOscars(oscar);
-			actor.setNacimiento(nacimiento);
 			em.getTransaction().begin();
-			em.persist(actor);
+			em.persist(a);
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
@@ -62,11 +55,11 @@ public class ServiceActor {
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		return "Actor creado";
 	}
 	@GET
 	@Path("listar")
 	@SuppressWarnings("unchecked")
+	@Consumes("application/json")
 	public Collection<Actor> listarActor(@QueryParam("nombre")String nombreActor) {
 		EntityManager em = emf.createEntityManager();
 		Query q = em.createNamedQuery("Actor.findByNombre");
@@ -77,7 +70,8 @@ public class ServiceActor {
 	}
 	@DELETE
 	@Path("eliminar")
-	public String eliminarActor(@QueryParam("id")int idActor) {
+	@Consumes("application/json")
+	public void eliminarActor(@QueryParam("id")int idActor) {
 		try{
 			EntityManager em = emf.createEntityManager();
 			Actor actor = em.find(Actor.class, idActor);
@@ -89,35 +83,26 @@ public class ServiceActor {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "usuario eliminado";
 	}
 	@PUT
 	@Path("modificar")
-	public String modificarActor(
-			@QueryParam("nombre")String nombre,
-			@QueryParam("genero")String genero,
-			@QueryParam("nacimiento")String nacimiento,
-			@QueryParam("oscars")int oscar,
-			@QueryParam("id")int id
-			){
-		String mensaje="";
+	@Consumes("application/json")
+	public void modificarActor(Actor a){
 		try{
 			EntityManager em = emf.createEntityManager();
-			Actor actorGet = em.find(Actor.class, id);
+			Actor actorGet = em.find(Actor.class, a.getIdactor());
 			em.getTransaction().begin();
-			actorGet.setNombreactor(nombre);
-			actorGet.setGenero(genero);
-			actorGet.setOscars(oscar);
-			actorGet.setNacimiento(nacimiento);
+			actorGet.setNombreactor(a.getNombreactor());
+			actorGet.setGenero(a.getGenero());
+			actorGet.setOscars(a.getOscars());
+			actorGet.setNacimiento(a.getNacimiento());
+			actorGet.setFotoactor(a.getFotoactor());
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
-			mensaje = "usuario modificado";
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			mensaje = "error modificando";
 		}
-		return mensaje;
 	}
 }

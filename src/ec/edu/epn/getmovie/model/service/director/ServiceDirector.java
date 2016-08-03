@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -14,12 +15,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import ec.edu.epn.getmovie.model.Director;
-@Path("Director")
+@Path("director")
 @Produces("application/json")
 public class ServiceDirector {
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieREST");
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
 	@GET
 	@Path("buscar")
+	@Consumes("application/json")
 	public Director buscarDirector(@QueryParam("id")int idDirector) {
 		Director director = new Director();
 		try{
@@ -36,16 +38,9 @@ public class ServiceDirector {
 	}
 	@POST
 	@Path("crear")
-	public void crearDirector(
-			@QueryParam("nombre")String nombre,
-			@QueryParam("genero")String genero,
-			@QueryParam("nacimiento")String nacimiento
-			){
-		Director director = new Director();
+	@Consumes("application/json")
+	public void crearDirector(Director director){
 		try{
-			director.setGenero(genero);
-			director.setNombredirector(nombre);
-			director.setNacimiento(nacimiento);
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
 			em.persist(director);
@@ -59,6 +54,7 @@ public class ServiceDirector {
 	@GET
 	@Path("listar")
 	@SuppressWarnings("unchecked")
+	@Consumes("application/json")
 	public Collection<Director> listarDirector(@QueryParam("nombre")String nombreDirector) {
 		Collection<Director> listaDirector = null;
 		try{
@@ -75,6 +71,7 @@ public class ServiceDirector {
 	}
 	@DELETE
 	@Path("eliminar")
+	@Consumes("application/json")
 	public void eliminarDirector(@QueryParam("id")int idDirector) {
 		try{
 			EntityManager em = emf.createEntityManager();
@@ -90,20 +87,16 @@ public class ServiceDirector {
 	}
 	@PUT
 	@Path("modificar")
-	public void modificarDirector(
-			@QueryParam("id")int id,
-			@QueryParam("nombre")String nombre,
-			@QueryParam("genero")String genero,
-			@QueryParam("nacimiento")String nacimiento
-			){
-		
+	@Consumes("application/json")
+	public void modificarDirector(Director d){
 		try{
+			
 			EntityManager em = emf.createEntityManager();
-			Director director = em.find(Director.class, id);
+			Director director = em.find(Director.class, d.getIddirector());
 			em.getTransaction().begin();
-			director.setNombredirector(nombre);
-			director.setGenero(genero);
-			director.setNacimiento(nacimiento);
+			director.setNombredirector(d.getNombredirector());
+			director.setGenero(d.getGenero());
+			director.setNacimiento(d.getNacimiento());
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
