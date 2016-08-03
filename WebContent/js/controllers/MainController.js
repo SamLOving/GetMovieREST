@@ -17,6 +17,9 @@ app.config(function ($routeProvider) {
 	   .when('/Cuenta/modificar/:email',  {
 			        templateUrl: 'admLocal/admCuenta/modificar.html',
 			        controller: 'modificarUsrCtrl'})
+		.when('/Cuenta/eliminar/:email',  {
+			        templateUrl: 'admLocal/admCuenta/home.html',
+			        controller: 'homeUsrCtrl'})
 	   .when('/Pelicula/home',  {
                    templateUrl: 'admLocal/admPelicula/home.html',
                    controller: 'Controlador1'})
