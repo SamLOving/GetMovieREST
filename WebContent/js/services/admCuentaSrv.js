@@ -34,7 +34,16 @@ app.service('admCuentaSrv', function($http) {
 				usuario).then(function(response) {
 			successCallback(response.data);
 		}, function(response) {
-			errorCallback("Problemas al crear el usuario");
+			errorCallback("Problemas al modificar el usuario");
+		});
+	}
+	
+	this.eliminarUsrSrv = funcrion(usuario, successCallback, errorCallback) {
+		$http.get('http://localhost:8080/GetMovieREST/servicios/cuenta/eliminar',
+				usuario).then(function(response) {
+			successCallback(response.data);
+		}, function(response) {
+			errorCallback("Problemas al eliminar el usuario");
 		});
 	}
 });
