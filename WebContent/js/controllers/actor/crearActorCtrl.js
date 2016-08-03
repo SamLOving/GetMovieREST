@@ -1,5 +1,5 @@
 var app = angular.module("getmovieApp");
-app.controller("crearActorCtrl", function ($scope, serviceActor) {
+app.controller("crearActorCtrl", function ($scope, $filter, serviceActor) {
     $scope.execRegistrar = false
     $scope.msgBackgroundError = {
         'background-color': '#E57373'
@@ -9,15 +9,21 @@ app.controller("crearActorCtrl", function ($scope, serviceActor) {
         , nombreactor: ""
         , genero: ""
         , nacimiento: ""
-        , oscars: 0
+        , oscars: ""
         , fotoactor: ""
     }
+    var encerar = function(){
+    	$scope.actor.idactor = 0;
+    	$scope.actor.nombreactor = "";
+    	$scope.actor.genero = "";
+    	$scope.actor.nacimiento = "";
+    	$scope.actor.oscars = "";
+    	$scope.actor.fotoactor = "";
+    };
     $scope.crear = function () {
-        $scope.actor.nacimiento = $filter('date')($scope.actor.nacimiento
-            , "yyyy-MM-dd")
+        $scope.actor.nacimiento = $filter('date')($scope.actor.nacimiento, "yyyy-MM-dd")
         $scope.execRegistrar = true;
         $scope.alerts = [];
-        $scope.actor.nacimiento
         if ($scope.actor.nombreactor == "" || $scope.actor.genero == "" || $scope.actor.nacimiento == "" || $scope.actor.oscars == "") {
             $scope.addAlert('danger', 'Error! Complete los campos vacíos.')
         }
@@ -26,32 +32,34 @@ app.controller("crearActorCtrl", function ($scope, serviceActor) {
                 , 'Error! Ingrese los campos correctamente.')
         }
         if ($scope.alerts.length == 0) {
-            serviceActor.crearActor($scope.actor, function (nuevoActor) {
+            serviceActor.crearActor($scope.actor, function (response) {
                 console.log("Nuevo actor creado con exito ");
-                $scope.actor = {
-                    idactor: 0
-                    , nombreactor: ""
-                    , genero: ""
-                    , nacimiento: ""
-                    , oscars: 0
-                    , fotoactor: ""
-                }
-            }, function (mensajeError) {
-                $scope.error = mensajeError;
-                $scope.alerts = [];
-                $scope.addAlert("danger"
-                    , "Error Interno! Consulte con el administrador.");
-            })
+                if (!angular.isUndefined(response.success)) {
+					console.log("exito " + response.success);
+					$scope.addAlert("success","Éxito! " + response.success);
+					
+				} else if (!angular.isUndefined(response.danger)){
+					console.log("error " + response.danger);
+					$scope.addAlert("danger","Error! " + response.danger);
+				}
+                encerar();
+			}, function (msgError){
+				console.log("error " + msgError);
+				$scope.addAlert("danger","Error Interno! Consulte con el administrador.");
+			})
         }
     };
     $scope.alerts = [];
-    $scope.addAlert = function (tipo, mensaje) {
-        $scope.alerts.push({
-            type: tipo
-            , msg: mensaje
-        });
-    };
-    $scope.closeAlert = function (index) {
-        $scope.alerts.splice(index, 1);
-    }
+
+	$scope.addAlert = function(tipo, mensaje) {
+		$scope.alerts.push({
+			type: tipo,
+			msg : mensaje
+		});
+	};
+
+	$scope.closeAlert = function(index) {
+		$scope.alerts.splice(index, 1);
+	};
+
 });

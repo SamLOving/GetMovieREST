@@ -89,8 +89,7 @@ public class ServiceDirector {
 	@Path("modificar")
 	@Consumes("application/json")
 	public void modificarDirector(Director d){
-		try{
-			
+		try{	
 			EntityManager em = emf.createEntityManager();
 			Director director = em.find(Director.class, d.getIddirector());
 			em.getTransaction().begin();

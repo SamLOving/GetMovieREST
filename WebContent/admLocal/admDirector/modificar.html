@@ -1,18 +1,18 @@
 
 <ul class="breadcrumb">
-	<li><a href="../homeLogin.html">Home</a>
-	<li><a href="home.html">Director</a></li>
+	<li><a href="#/">Home</a>
+	<li><a href="#/Director/home">Director</a></li>
 	<li class="active">Modificar</li>
 </ul>
-<form class="form-horizontal" name="directorRegistrarForm">
+<form class="form-horizontal" name="directorRegistrarForm" data-ng-init="buscar()">
 	<fieldset>
-		<legend>Modificación de Director</legend>
+		<legend>Modificaci&oacute;n de Director</legend>
 		<div class="form-group">
 			<label for="nombreDirector" class="col-lg-2 col-md-2 control-label">Nombre</label>
 			<div class="col-lg-10 col-md-10">
 				<div class="col-lg-11">
 					<input type="text" class="form-control" id="nombreDirector"
-						name="nombreDirector" ng-model="nombreDirector"
+						name="nombreDirector" ng-model="Director.nombredirector"
 						placeholder="Nombre Director" pattern=".{0,50}" required>
 				</div>
 				<div class="col-lg-1">
@@ -24,7 +24,7 @@
 						ng-show="directorRegistrarForm.nombreDirector.$error.pattern">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<strong>Error!</strong> El nombre del director debe tener un
-						máximo de 50 caracteres.
+						m&aacute;ximo de 50 caracteres.
 					</div>
 				</div>
 			</div>
@@ -34,8 +34,8 @@
 				nacimiento</label>
 			<div class="col-lg-10 col-md-10">
 				<div class="col-lg-11">
-					<input type="date" class="form-control" id="fecha" name="fecha"
-						ng-model="fecha" placeholder="yyyy-mm-dd" required>
+					<input type="text" class="form-control" id="fecha" name="fecha"
+						ng-model="Director.nacimiento" placeholder="yyyy-mm-dd" required>
 				</div>
 				<div class="col-lg-1">
 					<span class="msgError"
@@ -48,13 +48,13 @@
 			<div class="col-lg-10 col-md-10">
 				<div class="col-lg-11">
 					<div class="radio">
-						<label> <input type="radio" ng-model="genero"
+						<label> <input type="radio" ng-model="Director.genero"
 							name="genero" id="generoM" value="Masculino" required>
 							Masculino
 						</label>
 					</div>
 					<div class="radio">
-						<label> <input type="radio" ng-model="genero"
+						<label> <input type="radio" ng-model="Director.genero"
 							name="genero" id="GeneroF" value="Femenino" required>
 							Femenino
 						</label>

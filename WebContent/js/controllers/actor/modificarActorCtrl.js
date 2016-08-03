@@ -1,5 +1,5 @@
 var app = angular.module("getmovieApp");
-app.controller("modificarActorCtrl", function ($scope, $route, $location, serviceActor) {
+app.controller("modificarActorCtrl", function ($scope, $route, $filter, serviceActor) {
     $scope.execRegistrar = false
     $scope.msgBackgroundError = {
         'background-color': '#E57373'
@@ -9,7 +9,7 @@ app.controller("modificarActorCtrl", function ($scope, $route, $location, servic
         , nombreactor: ""
         , genero: ""
         , nacimiento: ""
-        , oscars: 0
+        , oscars: ""
         , fotoactor: ""
     }
     $scope.buscar = function () {
@@ -20,7 +20,7 @@ app.controller("modificarActorCtrl", function ($scope, $route, $location, servic
             } else {
                 $scope.actor.nombreactor = actor.nombreactor;
                 $scope.actor.genero = actor.genero;
-                $scope.actor.nacimiento = nacimiento;
+                $scope.actor.nacimiento = actor.nacimiento;
                 $scope.actor.oscars = actor.oscars;
                 $scope.actor.fotoactor = actor.fotoactor;
                 $scope.actor.idactor = actor.idactor;
@@ -32,11 +32,8 @@ app.controller("modificarActorCtrl", function ($scope, $route, $location, servic
     }
 
     $scope.modificar = function () {
-        $scope.actor.nacimiento = $filter('date')($scope.actor.nacimiento
-            , "yyyy-MM-dd")
         $scope.execRegistrar = true;
         $scope.alerts = [];
-        $scope.actor.nacimiento
         if ($scope.actor.nombreactor == "" || $scope.actor.genero == "" || $scope.actor.nacimiento == "" || $scope.actor.oscars == "") {
             $scope.addAlert('danger', 'Error! Complete los campos vacíos.')
         }
@@ -45,18 +42,19 @@ app.controller("modificarActorCtrl", function ($scope, $route, $location, servic
                 , 'Error! Ingrese los campos correctamente.')
         }
         if ($scope.alerts.length == 0) {
-
-            serviceActor.modificarActor($scope.actor, function (actorModicar) {
-                if (!angular.isUndefined(response.success)) {
+            serviceActor.modificarActor($scope.actor, function (response) {
+                console.log("Actor modificado ctrl")
+            	if (!angular.isUndefined(response.success)) {
                     console.log("exito " + response.success);
-                    $scope.addAlert("sucess", "Éxito! " + response.success);
+                    $scope.addAlert("success", "Éxito al modificar actor! " + response.success);
                     $scope.$location.path('/Actor/home').replace();
                 } else if (!angular.isUndefined(response.danger)) {
                     console.log("error " + response.danger);
-                    $scope.addAlert("danger", "Error! " + response.danger);
+                    $scope.addAlert("danger", "Error al modificar actor! " + response.danger);
                 }
 
             }, function (mensajeError) {
+            	console.log(" error Actor modificando ctrl")
                 $scope.error = mensajeError;
                 $scope.addAlert("danger", "Error Interno! Consulte con el administrador.");
             })

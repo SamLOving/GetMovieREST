@@ -1,11 +1,11 @@
 <ul class="breadcrumb">
-	<li><a href="../homeLogin.html">Home</a>
-	<li><a href="home.html">Actor</a></li>
-	<li class="active">Información</li>
+	<li><a href="#/">Home</a>
+	<li><a href="#/Actor/home">Actor</a></li>
+	<li class="active">Informaci&oacute;n</li>
 </ul>
-<form class="form-horizontal" name="actorRegistrarForm">
+<form class="form-horizontal" name="actorRegistrarForm" data-ng-init="buscar()">
 	<fieldset>
-		<legend>Información del Actor</legend>
+		<legend>Informaci&oacute;n del Actor</legend>
 		<div class="form-group">
 			<label for="nombreActor" class="col-lg-2 col-md-2 control-label">Nombre</label>
 			<div class="col-lg-10 col-md-10">
@@ -33,7 +33,7 @@
 				nacimiento</label>
 			<div class="col-lg-10 col-md-10">
 				<div class="col-lg-11">
-					<input type="date" class="form-control" id="fecha" name="fecha"
+					<input type="text" class="form-control" id="fecha" name="fecha"
 						ng-model="actor.nacimiento" placeholder="yyyy-mm-dd" required readonly>
 				</div>
 				<div class="col-lg-1">
@@ -48,13 +48,13 @@
 				<div class="col-lg-11">
 					<div class="radio">
 						<label> <input type="radio" ng-model="actor.genero"
-							name="genero" id="generoM" value="Masculino" required disable>
+							name="genero" id="generoM" value="Masculino" required disabled>
 							Masculino
 						</label>
 					</div>
 					<div class="radio">
 						<label> <input type="radio" ng-model="actor.genero"
-							name="genero" id="GeneroF" value="Femenino" required disable>
+							name="genero" id="GeneroF" value="Femenino" required disabled>
 							Femenino
 						</label>
 					</div>
@@ -99,8 +99,8 @@
 		</div>
 		<div>
 			<a class="btn btn-primary" data-container="body"
-				data-toggle="popover" data-placement="top" href="home.html">Volver</a>
-			{{url}}
+				data-toggle="popover" data-placement="top" href="#/Actor/home">Volver</a>
+			
 		</div>
 	</fieldset>
 </form>

@@ -1,10 +1,10 @@
 
 <ul class="breadcrumb">
-	<li><a href="../homeLogin.html">Home</a>
-	<li><a href="home.html">Actor</a></li>
+	<li><a href="#/">Home</a>
+	<li><a href="#/Actor/home">Actor</a></li>
 	<li class="active">Modificar</li>
 </ul>
-<form class="form-horizontal" name="actorModificarForm">
+<form class="form-horizontal" name="actorModificarForm" data-ng-init="buscar()">
 	<fieldset>
 		<legend>Modifaci&oacute;n de Actor</legend>
 		<div class="form-group">
@@ -12,7 +12,7 @@
 			<div class="col-lg-10 col-md-10">
 				<div class="col-lg-10">
 					<input type="text" class="form-control" id="nombreActor"
-						name="actor.nombreactor" ng-model="nombreActor"
+						name="nombreActor" ng-model="actor.nombreactor"
 						placeholder="Nombre Actor" pattern=".{0,50}" required>
 				</div>
 				<div class="col-lg-1">
@@ -34,8 +34,8 @@
 				nacimiento</label>
 			<div class="col-lg-10 col-md-10">
 				<div class="col-lg-10">
-					<input type="date" class="form-control" id="nacimiento" name="nacimiento"
-						ng-model="actor.nacimiento" placeholder="yyyy-mm-dd" required>
+					<input type="text" class="form-control" id="nacimiento" name="nacimiento"
+						ng-model="actor.nacimiento" placeholder="yyyy-mm-dd" required value="{{actor.nacimiento}}">
 				</div>
 				<div class="col-lg-1">
 					<span class="msgError"

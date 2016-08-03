@@ -1,5 +1,5 @@
 var app = angular.module("getmovieApp");
-app.controller("verDirectorCtrl", function($scope, $rootScope, $route, $location, serviceActor) {
+app.controller("verDirectorCtrl", function($scope, $route, $filter, serviceDirector) {
 	$scope.Director = {
 		iddirector : 0,
 		nombredirector : "",
@@ -9,16 +9,15 @@ app.controller("verDirectorCtrl", function($scope, $rootScope, $route, $location
 	}
 	$scope.buscar = function() {
 		console.log("Current Params: " + $route.current.params.id);
-		serviceActor.buscarActor($route.current.params.id, function(actor){
-			if (actor == ""){
-				$scope.$location.path('/Actor/home').replace();
+		serviceDirector.buscarDirector($route.current.params.id, function(director){
+			if (director == ""){
+				$scope.$location.path('/Director/home').replace();
 			}else {
-				$scope.actor.nombreactor = actor.nombreactor;
-				$scope.actor.genero = actor.genero;
-				$scope.actor.nacimiento = nacimiento;
-				$scope.actor.oscars = actor.oscars;
-				$scope.actor.fotoactor = actor.fotoactor;
-				$scope.actor.idactor = actor.idactor;
+				$scope.Director.nombredirector = director.nombredirector;
+				$scope.Director.genero = director.genero;
+				$scope.Director.nacimiento = director.nacimiento;
+				$scope.Director.fotodirector = director.fotodirector;
+				$scope.Director.iddirector = director.iddirector;
 			}
 		}, function(){
 			console.log("error " + msgError);

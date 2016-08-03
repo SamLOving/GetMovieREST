@@ -14,7 +14,14 @@ app.controller("controllerActor", function ($scope, $filter, $location, $route, 
         , fotoactor: ""
     }
     $scope.nombre = "";
-
+    var encerar = function(){
+    	$scope.actor.idactor = 0;
+    	$scope.actor.nombreactor = "";
+    	$scope.actor.genero = "";
+    	$scope.actor.nacimiento = "";
+    	$scope.actor.oscars = "";
+    	$scope.actor.fotoactor = "";
+    };
     $scope.listar = function () {
         serviceActor.listarActor($scope.nombre, function (listaActores) {
             // console.log("Ctrl exito " + listaActores);
