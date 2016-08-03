@@ -1,0 +1,139 @@
+<ul class="breadcrumb">
+	<li><a href="#">Home</a>
+	<li><a href="#Cuenta/home">Cuenta</a></li>
+	<li class="active">Registrar</li>
+</ul>
+<div ng-controller="registrarUsrCtrl">
+	<form class="form-horizontal" id="registrarForm" name="registrarForm"
+		method="post" action="singup">
+		<fieldset>
+			<legend>Registrar Usuarios</legend>
+	
+			<div class="form-group">
+				<label for="inputName" class="col-lg-2 col-md-2 control-label">Nombre</label>
+				<div class="col-lg-10 col-md-10">
+					<div class="col-lg-11">
+						<input type="text" class="form-control" id="inputName"
+							name="username" ng-model="usuario.nombreusr" placeholder="Nombre"
+							pattern=".{0,50}" required 
+							ng-style="((registrarForm.username.$error.required || registrarForm.username.$error.pattern) 
+								&& execRegistrar == true) && msgBackgroundError">
+					</div>
+					<div class="col-lg-1">
+						<span class="msgError" ng-show="registrarForm.username.$error.required">(*)</span>
+					</div>
+					<div class="col-lg-11">
+						<div class="alert alert-dismissible alert-danger"
+							ng-show="registrarForm.username.$error.pattern">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>Error!</strong> El nombre de usuario debe tener un m&aacute;ximo
+							de 50 caracteres.
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label for="inputEmail" class="col-lg-2 control-label">Email</label>
+				<div class="col-lg-10 col-md-10">
+					<div class="col-lg-11">
+						<input type="email" class="form-control" id="inputEmail"
+							name="email" ng-model="usuario.correousr" placeholder="Email"
+							pattern=".{0,100}" required
+							ng-style="((registrarForm.email.$error.required || registrarForm.email.$error.pattern
+								|| registrarForm.email.$error.email) 
+								&& execRegistrar == true) && msgBackgroundError">
+					</div>
+					<div class="col-lg-1">
+						<span class="msgError" ng-show="registrarForm.email.$error.required">(*)</span>
+					</div>
+					<div class="col-lg-11">
+						<div class="alert alert-dismissible alert-danger"
+							ng-show="registrarForm.email.$error.pattern">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>Error!</strong> El email debe debe tener un m&aacute;ximo de 100
+							caracteres.
+						</div>
+					</div>
+					<div class="col-lg-11">
+						<div class="alert alert-dismissible alert-danger"
+							ng-show="registrarForm.email.$error.email">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>Error!</strong> Ingrese un email v&aacute;lido.
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label for="inputPassword" class="col-lg-2 control-label">Contrase&ntilde;a</label>
+				<div class="col-lg-10 col-md-10">
+					<div class="col-lg-11">
+						<input type="password" class="form-control" id="inputPassword"
+							name="password" ng-model="usuario.claveusr"
+							placeholder="Contrase&ntilde;a" required pattern=".{8,16}"
+							ng-style="((registrarForm.password.$error.required
+								|| registrarForm.password.$error.pattern && execRegistrar) 
+								&& execRegistrar == true) && msgBackgroundError">
+					</div>
+					<div class="col-lg-1">
+						<span class="msgError" ng-show="registrarForm.password.$error.required">(*)</span>
+					</div>
+					<div class="col-lg-11">
+						<div class="alert alert-dismissible alert-danger"
+							ng-show="registrarForm.password.$error.pattern">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>Error!</strong> La contrase&ntilde;a debe tener de 8 a 16
+							caracteres.
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label for="inputPassword" class="col-lg-2 control-label">Confirmar	contrase&ntilde;a</label>
+				<div class="col-lg-10 col-md-10">
+					<div class="col-lg-11">
+						<input type="password" class="form-control" id="inputPassword"
+							name="confirmPassword" ng-model="confirmarClaveUsuario"
+							placeholder="Contrase&ntilde;a" required pattern=".{8,16}"
+							ng-style="((registrarForm.confirmPassword.$error.required
+								|| registrarForm.confirmPassword.$error.pattern
+								|| usuario.claveusr != confirmarClaveUsuario) 
+								&& execRegistrar == true) && msgBackgroundError">
+					</div>
+					<div class="col-lg-1">
+						<span class="msgError"
+							ng-show="registrarForm.confirmPassword.$error.required">(*)</span>
+					</div>
+					<div class="col-lg-11">
+						<div class="alert alert-dismissible alert-danger"
+							ng-show="registrarForm.confirmPassword.$error.pattern">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>Error!</strong> La contrase&ntilde;a debe tener de 8 a 16
+							caracteres.
+						</div>
+					</div>
+					<div class="col-lg-11">
+						<div class="alert alert-dismissible alert-danger"
+							ng-show="usuario.claveusr != confirmarClaveUsuario">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>Error!</strong> Las contrase&ntilde;as deben coincidir.
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" data-container="body"
+					data-toggle="popover" data-placement="top" ng-click="registrarUsrAdmin()">Registrar</button>
+				<a href="#Cuenta/home" class="btn btn-primary">Regresar</a>
+			</div>
+		</fieldset>
+	</form>
+	
+	<div class="appMsg">
+		<div uib-alert ng-repeat="alert in alerts"
+			ng-class="'alert-' + (alert.type || 'warning')"
+			close="closeAlert($index)">{{alert.msg}}</div>
+	</div>
+</div>

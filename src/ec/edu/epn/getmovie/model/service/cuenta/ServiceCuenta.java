@@ -17,6 +17,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import ec.edu.epn.getmovie.model.Usuario;
 
@@ -107,10 +108,11 @@ public class ServiceCuenta {
 		return listaUsuario;
 	}
 
-	@DELETE
+	@GET
 	@Path(value="eliminar")
 	public void eliminarUsuario(
 			@QueryParam(value="email") String email) {
+		System.out.println(email);
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
 		EntityManager em = emf.createEntityManager();
 		

@@ -13,19 +13,23 @@ app.controller("modificarUsrCtrl", function($scope, $rootScope, $route, admCuent
 	
 	$scope.init = function() {
 		console.log("Current Params: " + $route.current.params.email);
-		admCuentaSrv.findUsrSrv($route.current.params.email, function(usr){
-			if (usr == ""){
-				$scope.$location.path('/Home').replace();
-			}else {
-				$scope.usuario.correousr = usr.correousr;
-				$scope.usuario.claveusr = usr.claveusr;
-				$scope.usuario.nombreusr = usr.nombreusr;
-				$scope.confirmarClaveUsuario = $scope.usuario.claveusr;
-			}
-		}, function(){
-			console.log("error " + msgError);
-			$scope.addAlert("danger","Error Interno! Consulte con el administrador.");
-		})
+		if (angular.isUndefined($rootScope.usuario.isadmin)){
+			$scope.$location.path('/Home').replace();
+		} else {
+			admCuentaSrv.findUsrSrv($route.current.params.email, function(usr){
+				if (usr == ""){
+					$scope.$location.path('/Home').replace();
+				}else {
+					$scope.usuario.correousr = usr.correousr;
+					$scope.usuario.claveusr = usr.claveusr;
+					$scope.usuario.nombreusr = usr.nombreusr;
+					$scope.confirmarClaveUsuario = $scope.usuario.claveusr;
+				}
+			}, function(){
+				console.log("error " + msgError);
+				$scope.addAlert("danger","Error Interno! Consulte con el administrador.");
+			})
+		}
 	}
 	
 	$scope.modificarUsr = function() {
@@ -44,9 +48,13 @@ app.controller("modificarUsrCtrl", function($scope, $rootScope, $route, admCuent
 			admCuentaSrv.modificarUsrSrv($scope.usuario, function(response){
 				if (!angular.isUndefined(response.success)) {
 					console.log("exito " + response.success);
-					$scope.addAlert("sucess","Éxito! " + response.success);
-					$scope.$location.path('/Cuenta/home').replace();
-					$rootScope.usuario.nombreusr = $scope.usuario.nombreusr;
+					if ($rootScope.usuario.isAdmin == 0) {
+						$scope.addAlert("sucess","Éxito! " + response.success);
+						$scope.$location.path('/Cuenta/home').replace();
+						$rootScope.usuario.nombreusr = $scope.usuario.nombreusr;
+					} else {
+						$scope.$location.path('/Administrar').replace();
+					}
 				} else if (!angular.isUndefined(response.danger)){
 					console.log("error " + response.danger);
 					$scope.addAlert("danger","Error! " + response.danger);

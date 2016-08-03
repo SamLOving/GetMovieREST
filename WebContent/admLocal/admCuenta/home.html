@@ -6,17 +6,14 @@
 	
 <a href="#Cuenta/info" class="btn btn-default btn-lg btn-block">Ver Informaci&oacute;n de la Cuenta</a>
 
-<a href="registrar.html" class="btn btn-default btn-lg btn-block" ng-show="usuario.isadmin == 1">
-	Registrar usuario</a>
+<a href="#Cuenta/registrar" class="btn btn-default btn-lg btn-block" ng-show="usuario.isadmin == 1">Registrar usuario</a>
 	
-<a href="${pageContext.request.contextPath}/cuenta/administrar" ng-show="usuario.isadmin == 1"
-	class="btn btn-default btn-lg btn-block">Administrar</a>
+<a href="#Cuenta/administrar" ng-show="usuario.isadmin == 1" class="btn btn-default btn-lg btn-block">Administrar</a>
 
 <a href="#Cuenta/modificar/{{usuario.correousr}}" class="btn btn-default btn-lg btn-block">Modificar Cuenta</a>
 
 <a href="#Cuenta/eliminar/{{usuario.correousr}}" class="buttonsHome btn btn-default btn-lg btn-block" ng-hide="usuario.isadmin == 1"
-		name="usuarioEliminar" ng-click="eliminarUsr()">Darse de baja</a>
+	name="usuarioEliminar" ng-click="eliminarUsr()">Darse de baja</a>
 
-<a href="${pageContext.request.contextPath}/cuenta/cerrarsesion"
-	class="buttonsHome btn btn-default btn-lg btn-block">Cerrar
-	sesi&oacute;n</a>
+<a href="#" class="buttonsHome btn btn-default btn-lg btn-block" ng-click="cerrarSesion()">
+	Cerrar	sesi&oacute;n</a>

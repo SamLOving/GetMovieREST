@@ -38,12 +38,21 @@ app.service('admCuentaSrv', function($http) {
 		});
 	}
 	
-	this.eliminarUsrSrv = funcrion(usuario, successCallback, errorCallback) {
-		$http.get('http://localhost:8080/GetMovieREST/servicios/cuenta/eliminar',
+	this.eliminarUsrSrv = function(usuario, successCallback, errorCallback) {
+		$http.get('http://localhost:8080/GetMovieREST/servicios/cuenta/eliminar?email=' +
 				usuario).then(function(response) {
 			successCallback(response.data);
 		}, function(response) {
 			errorCallback("Problemas al eliminar el usuario");
+		});
+	}
+	
+	this.listarUsrSrv = function(usuario, successCallback, errorCallback) {
+		$http.get('http://localhost:8080/GetMovieREST/servicios/cuenta/listarByEmail?email=' +
+				usuario).then(function(response) {
+			successCallback(response.data);
+		}, function(response) {
+			errorCallback("Problemas al consultar usuarios el usuario");
 		});
 	}
 });

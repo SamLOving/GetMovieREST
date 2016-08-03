@@ -1,0 +1,62 @@
+<ul class="breadcrumb">
+	<li><a href="${pageContext.request.contextPath}/vistas/home.jsp">Home</a>
+	<li><a href="${pageContext.request.contextPath}/vistas/cuenta/home.jsp">Cuenta</a></li>
+	<li class="active">Administrar</li>
+</ul>
+<form name="formAdministrarUsr" class="form-horizontal" id="loginForm" data-ng-init="init()">
+	<fieldset>
+		<legend>Administraci&oacute;n de Usuarios</legend>
+		<div>
+			<div class="form-group">
+				<label for="inputName" class="col-lg-1 control-label">Email</label>
+				<div class="col-lg-11">
+					<input type="text" class="form-control" id="inputEmail" ng-model="correo"
+						name="email" placeholder="Email"/>
+				</div>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" data-container="body"
+					data-toggle="popover" data-placement="top" ng-click="listarUsr()">Buscar</button>
+			</div>
+		</div>
+	</fieldset>
+</form>
+<div class="formclass">
+	<div class="row">
+		<div class="col-xs-12">
+			<table class="table table-striped table-hover ">
+				<thead>
+					<tr>
+						<th class="col-xs-5">Nombre de Usuario</th>
+						<th class="col-xs-6">Email</th>
+						<th class="col-xs-1">Acci&oacute;n</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="usr in usuarios">
+					<tr>
+						<td>{{usr.nombreusr}}</td>
+						<td>{{usr.correousr}}</td>
+						<td>
+							<form method="get"
+								action="${pageContext.request.contextPath}/cuenta/modificar">
+								<a type="button" class="btn btn-default"
+									href="#Cuenta/modificar/{{usr.correousr}}">
+									<span class="material-icons md-16">&#xE150;</span>
+								</a>
+							</form>
+						</td>
+						<td>
+							<form method="post"
+								action="${pageContext.request.contextPath}/cuenta/eliminar">
+								<a type="button" class="btn btn-default"
+									href="#Cuenta/eliminar/{{usr.correousr}}">
+									<span class="material-icons md-16">&#xE872;</span>
+								</a>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
