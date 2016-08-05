@@ -1,5 +1,5 @@
 var app = angular.module("getmovieApp");
 
-app.controller("controllerGenero", function(){
+app.controller("homeGeneroCtrl", function(){
   
 });

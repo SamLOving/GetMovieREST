@@ -29,10 +29,25 @@ app.config(function ($routeProvider) {
 	   .when('/Pelicula/home',  {
                    templateUrl: 'admLocal/admPelicula/home.html',
                    controller: 'Controlador1'})
-	   .when('/Genero/:paramB',  {
+	   .when('/Genero/home',  {
                    templateUrl: 'admLocal/admGenero/home.html',
-                   controller: 'Controlador2'})
-       .when('/Actor/home',  {
+                   controller: 'homeGeneroCtrl'})
+        .when('/Genero/info/:idgenero',  {
+                   templateUrl: 'admLocal/admGenero/info.html',
+                   controller: 'infoGeneroCtrl'})
+        .when('/Genero/administrar',  {
+                   templateUrl: 'admLocal/admGenero/administrar.html',
+                   controller: 'admGeneroCtrl'})
+        .when('/Genero/modificar/:idgenero',  {
+                   templateUrl: 'admLocal/admGenero/modificar.html',
+                   controller: 'modificarGeneroCtrl'})
+        .when('/Genero/registrar',  {
+                   templateUrl: 'admLocal/admGenero/registrar.html',
+                   controller: 'registrarGeneroCtrl'})
+        .when('/Genero/eliminar/:idgenero',  {
+                   templateUrl: 'admLocal/admGenero/eliminar.html',
+                   controller: 'eliminarGeneroCtrl'})
+        .when('/Actor/home',  {
                    templateUrl: 'admLocal/admActor/home.html',
                    controller: 'homeActorCtrl'})
         .when('/Actor/registrar',  {
@@ -62,9 +77,24 @@ app.config(function ($routeProvider) {
         .when('/Director/administrar',  {
                    templateUrl: 'admLocal/admDirector/administrar.html',
                    controller: 'controllerDirector'})
-       .when('/Productora/:paramE',  {
+       .when('/Productora/administrar',  {
+                   templateUrl: 'admLocal/admProductora/administrar.html',
+                   controller: 'admProductoraCtrl'})
+    .when('/Productora/home',  {
                    templateUrl: 'admLocal/admProductora/home.html',
-                   controller: 'Controlador5'})
+                   controller: 'homeProductoraCtrl'})
+    .when('/Productora/info/:idproductora',  {
+                   templateUrl: 'admLocal/admProductora/info.html',
+                   controller: 'infoProductoraCtrl'})
+    .when('/Productora/modificar/:idproductora',  {
+                   templateUrl: 'admLocal/admProductora/modificar.html',
+                   controller: 'modificarProductoraCtrl'})
+    .when('/Productora/registrar',  {
+                   templateUrl: 'admLocal/admProductora/registrar.html',
+                   controller: 'registrarProductoraCtrl'})
+     .when('/Productora/eliminar/:idproductora',  {
+                   templateUrl: 'admLocal/admProductora/eliminar.html',
+                   controller: 'eliminarProductoraCtrl'})
        .when('/login',  {
                    templateUrl: 'admLocal/admCuenta/login.html',
                    controller: 'loginCtrl'})

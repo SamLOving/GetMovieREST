@@ -1,11 +1,14 @@
 package ec.edu.epn.getmovie.model.service.genero;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,16 +31,12 @@ public class ServiceGenero {
 
 	@POST
 	@Path("crear")
-	public String crearGenero(@QueryParam("nombreGenero") String nombreGenero,
-			@QueryParam("descripcionGenero") String descripcionGenero) {
-
-		String mensaje = "";
+	@Consumes("application/json")
+	public Map<String, String> crearGenero(Genero generito) {
+		Map<String, String> response = new HashMap<String, String>();
 		try {
 			// entityManager permite usar el crud (crear consultar eliminar)
 			EntityManager em = emf.createEntityManager();
-			Genero generito = new Genero();
-			generito.setNombregenero(nombreGenero);
-			generito.setDescripciongenero(descripcionGenero);
 			// permite iniciar la query
 			em.getTransaction().begin();
 			// permite hacer la creacion del objeto, persist = insert
@@ -47,19 +46,19 @@ public class ServiceGenero {
 			// siempre se cierra el entitymanager
 			em.close();
 			emf.close();
-			mensaje = "Genero creado correctamente";
+			response.put("success", "Género creado existosamente.");
+			return response;
 		} catch (Exception e) {
-			e.printStackTrace();
-			mensaje = "Ocurrio un error en la creacion de genero";
+			response.put("danger", "Ha ocurrido un error al crear género.");
+			return response;
 		}
-
-		return mensaje;
 	}
 
 	@DELETE
 	@Path("eliminar")
-	public String eliminarGenero(@QueryParam("idGenero") int idGenero) {
-		String mensaje = "";
+	@Consumes("application/json")
+	public Map<String, String> eliminarGenero(@QueryParam("idGenero") int idGenero) {
+		Map<String, String> response = new HashMap<String, String>();
 		try {
 			EntityManager em = emf.createEntityManager();
 			Genero genero = em.find(Genero.class, idGenero);
@@ -68,46 +67,48 @@ public class ServiceGenero {
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
-			mensaje = "Genero eliminado correctamente";
+			response.put("success", "Género eliminado existosamente.");
+			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
-			mensaje = "Ocurrio un error en la eliminacion de Genero";
+			response.put("danger", "Ha ocurrido un error al eliminar género.");
+			return response;
 		}
-		return mensaje;
 	}
 
 	@PUT
 	@Path("modificar")
-	public String modificarGenero(@QueryParam("idGenero") int idGenero,
-			@QueryParam("nombreGenero") String nombreGenero,
-			@QueryParam("descripcionGenero") String descripcionGenero) {
-		String mensaje = "";
+	@Consumes("application/json")
+	public Map<String, String> modificarGenero(Genero g) {
+		Map<String, String> response = new HashMap<String, String>();
 		try {
 			EntityManager em = emf.createEntityManager();
 
-			Genero generito = em.find(Genero.class, idGenero);
+			Genero generito = em.find(Genero.class, g.getIdgenero());
 
 			// permite iniciar la query
 			em.getTransaction().begin();
 
-			generito.setNombregenero(nombreGenero);
-			generito.setDescripciongenero(descripcionGenero);
+			generito.setNombregenero(g.getNombregenero());
+			generito.setDescripciongenero(g.getDescripciongenero());
 
 			// una query se asegura de que se realice, se hizo o no
 			em.getTransaction().commit();
 			// siempre se cierra el entitymanager
 			em.close();
 			emf.close();
-			mensaje = "Genero modificado con exito";
+			response.put("success", "Género modificado existosamente.");
+			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
-			mensaje = "Ocurrio un error con el modificado de genero";
+			response.put("danger", "Ha ocurrido un error al modificar género.");
+			return response;
 		}
-		return mensaje;
 	}
 
 	@GET
 	@Path("buscar")
+	@Consumes("applicacion/json")
 	public Genero buscarGenero(@QueryParam("idGenero") int idgenero) {
 		String mensaje = "";
 		Genero generito = new Genero();
@@ -131,6 +132,7 @@ public class ServiceGenero {
 	@GET
 	@Path("listar")
 	@SuppressWarnings("unchecked")
+	@Consumes("application/json")
 	public Collection<Genero> listarGenero(
 			@QueryParam("nombreGenero") String nombreGenero) {
 		EntityManager em = emf.createEntityManager();

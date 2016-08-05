@@ -1,11 +1,14 @@
 package ec.edu.epn.getmovie.model.service.productora;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,42 +29,41 @@ public class ServiceProductora {
 
 	@POST
 	@Path("crear")
-	public String crearProductora(
-			@QueryParam("nombreProductora") String nombreProductora,
-			@QueryParam("paisProductora") String paisProductora) {
+	@Consumes("application/json")
+	public Map<String, String> crearProductora(Productora p) {
 		// entityManager permite usar el crud (crear consultar eliminar)
 
-		String mensaje = "";
+		Map<String, String> response = new HashMap<String, String>();
 		try {
 			EntityManager em = emf.createEntityManager();
-			Productora productorita = new Productora();
-			productorita.setNombreproductora(nombreProductora);
-			productorita.setPaisproductora(paisProductora);
+			
 
 			// permite iniciar la query
 			em.getTransaction().begin();
 			// permite hacer la creacion del objeto, persist = insert
-			em.persist(productorita);
+			em.persist(p);
 			// una query se asegura de que se realice, se hizo o no
 			em.getTransaction().commit();
 			// siempre se cierra el entitymanager
 			em.close();
 			emf.close();
-			mensaje = "Productora creada correctamente";
+			response.put("success", "Productora creado existosamente.");
+			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
-			mensaje = "Ocurrio un error en la creacion de productora";
+			response.put("danger", "Ha ocurrido un error al crear productora.");
+			return response;
 		}
-		return mensaje;
 
 	}
 
 	@DELETE
 	@Path("eliminar")	
-	public String eliminarProductora(
+	@Consumes("application/json")
+	public Map<String, String> eliminarProductora(
 			@QueryParam("idProductora") int idproductora) {
 
-		String mensaje = "";
+		Map<String, String> response = new HashMap<String, String>();
 
 		try {
 
@@ -72,33 +74,31 @@ public class ServiceProductora {
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
-			mensaje = "Productora eliminada correctamente";
+			response.put("success", "Productora eliminado existosamente.");
+			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
-			mensaje = "Ocurrio un erroe en la eliminacion de producctora";
+			response.put("danger", "Ha ocurrido un error al eliminar productora.");
+			return response;
 		}
-
-		return mensaje;
 	}
 
 	@PUT
 	@Path("modificar")
-	public String modificarProductora(
-			@QueryParam("idProductora") int idProductora,
-			@QueryParam("nombreProductora") String nombreProductora,
-			@QueryParam("paisProductora") String paisProductora) {
+	@Consumes("application/json")
+	public Map<String, String> modificarProductora(Productora p) {
 
-		String mensaje = "";
+		Map<String, String> response = new HashMap<String, String>();
 
 		try {
 
 			EntityManager em = emf.createEntityManager();
-			Productora productora = em.find(Productora.class, idProductora);
+			Productora productora = em.find(Productora.class, p.getIdproductora());
 
 			// permite iniciar la query
 			em.getTransaction().begin();
-			productora.setNombreproductora(nombreProductora);
-			productora.setPaisproductora(paisProductora);
+			productora.setNombreproductora(p.getNombreproductora());
+			productora.setPaisproductora(p.getPaisproductora());
 
 			// una query se asegura de que se realice, se hizo o no
 			em.getTransaction().commit();
@@ -106,19 +106,21 @@ public class ServiceProductora {
 			em.close();
 			emf.close();
 
-			mensaje = "Productora modificada con exito";
+			response.put("success", "Productora modificado existosamente.");
+			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
-			mensaje = "Ocurrio un error con el modificado de productora";
+			response.put("danger", "Ha ocurrido un error al modificar productora.");
+			return response;
 		}
-
-		return mensaje;
 	}
 
 	@GET
 	@Path("buscar")
+	@Consumes("application/json")
 	public Productora buscarProductora(
 			@QueryParam("idProductora") int idproductora) {
+		String mensaje="";
 		Productora productora = new Productora();
 		try {
 			EntityManager em = emf.createEntityManager();
@@ -128,8 +130,10 @@ public class ServiceProductora {
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
+			mensaje="Productora Encontrada";
 		} catch (Exception e) {
 			e.printStackTrace();
+			mensaje="Ocurrio un error en la busqueda de Productora";
 		}
 
 		return productora;
@@ -138,6 +142,7 @@ public class ServiceProductora {
 	@GET
 	@Path("listar")
 	@SuppressWarnings("unchecked")
+	@Consumes("application/json")
 	public Collection<Productora> listarProductora(
 			@QueryParam("nombreProductora") String nombreproductora) {
 		EntityManager em = emf.createEntityManager();
