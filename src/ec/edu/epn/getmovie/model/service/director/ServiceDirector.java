@@ -1,5 +1,7 @@
 package ec.edu.epn.getmovie.model.service.director;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,7 +41,8 @@ public class ServiceDirector {
 	@POST
 	@Path("crear")
 	@Consumes("application/json")
-	public void crearDirector(Director director){
+	public Map<String, String> crearDirector(Director director){
+		Map<String, String> response = new HashMap<String, String>();
 		try{
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
@@ -47,8 +50,12 @@ public class ServiceDirector {
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
+			response.put("success", "Director creado con éxito.");
+			return response;
 		}catch(Exception e){
 			e.printStackTrace();
+			response.put("danger", "Director no creado.");
+			return response;
 		}
 	}
 	@GET
@@ -72,7 +79,8 @@ public class ServiceDirector {
 	@DELETE
 	@Path("eliminar")
 	@Consumes("application/json")
-	public void eliminarDirector(@QueryParam("id")int idDirector) {
+	public Map<String, String> eliminarDirector(@QueryParam("id")int idDirector) {
+		Map<String, String> response = new HashMap<String, String>();
 		try{
 			EntityManager em = emf.createEntityManager();
 			Director director = em.find(Director.class, idDirector);
@@ -81,14 +89,19 @@ public class ServiceDirector {
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
+			response.put("success", "Actor eliminado con éxito.");
+			return response;
 		}catch(Exception e){
 			e.printStackTrace();
+			response.put("danger", "Actor no eliminado.");
+			return response;
 		}	
 	}
 	@PUT
 	@Path("modificar")
 	@Consumes("application/json")
-	public void modificarDirector(Director d){
+	public Map<String, String> modificarDirector(Director d){
+		Map<String, String> response = new HashMap<String, String>();
 		try{	
 			EntityManager em = emf.createEntityManager();
 			Director director = em.find(Director.class, d.getIddirector());
@@ -99,8 +112,12 @@ public class ServiceDirector {
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
+			response.put("success", "Actor modificado con éxito.");
+			return response;
 		}catch(Exception e){
 			e.printStackTrace();
+			response.put("danger", "Actor no modificado.");
+			return response;
 		}
 	}
 }

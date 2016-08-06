@@ -34,7 +34,7 @@
 				nacimiento</label>
 			<div class="col-lg-10 col-md-10">
 				<div class="col-lg-10">
-					<input type="text" class="form-control" id="nacimiento" name="nacimiento"
+					<input type="date" class="form-control" id="nacimiento" name="nacimiento"
 						ng-model="actor.nacimiento" placeholder="yyyy-mm-dd" required value="{{actor.nacimiento}}">
 				</div>
 				<div class="col-lg-1">
@@ -99,6 +99,9 @@
 		<div>
 			<button type="button" ng-click="modificar()" class="btn btn-primary" data-container="body"
 				data-toggle="popover" data-placement="top">Modificar</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a class="btn btn-primary" data-container="body"
+				data-toggle="popover" data-placement="top" href="#/Actor/home">Volver</a>
 		</div>
 	</fieldset>
 </form>

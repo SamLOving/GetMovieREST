@@ -1,5 +1,8 @@
 package ec.edu.epn.getmovie.model.service.actor;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,11 +17,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import utilidades.Constantes;
 import ec.edu.epn.getmovie.model.Actor;
 
 @Path("actor")
 @Produces("application/json")
 public class ServiceActor {
+	public static final String FORMATOFECHA = "yyyy-MM-dd";
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("GetMovieJPA");
 	@GET
 	@Path("buscar")
@@ -43,17 +48,23 @@ public class ServiceActor {
 	@POST
 	@Path("crear")
 	@Consumes("application/json")
-	public void crearActor(Actor a) {
+	public Map<String, String> crearActor(Actor a) {
+		Map<String, String> response = new HashMap<String, String>();
 		try{
 			EntityManager em = emf.createEntityManager();
+			
 			em.getTransaction().begin();
 			em.persist(a);
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
+			response.put("success", "Actor creado con éxito.");
+			return response;
 		}
 		catch(Exception e){
 			e.printStackTrace();
+			response.put("danger", "Actor no creado.");
+			return response;
 		}
 	}
 	@GET
@@ -71,7 +82,8 @@ public class ServiceActor {
 	@DELETE
 	@Path("eliminar")
 	@Consumes("application/json")
-	public void eliminarActor(@QueryParam("id")int idActor) {
+	public Map<String, String> eliminarActor(@QueryParam("id")int idActor) {
+		Map<String, String> response = new HashMap<String, String>();
 		try{
 			EntityManager em = emf.createEntityManager();
 			Actor actor = em.find(Actor.class, idActor);
@@ -80,14 +92,19 @@ public class ServiceActor {
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
+			response.put("success", "Actor eliminado con éxito.");
+			return response;
 		}catch(Exception e){
 			e.printStackTrace();
+			response.put("danger", "Actor no eliminado.");
+			return response;
 		}
 	}
 	@PUT
 	@Path("modificar")
 	@Consumes("application/json")
-	public void modificarActor(Actor a){
+	public Map<String, String> modificarActor(Actor a) {
+		Map<String, String> response = new HashMap<String, String>();
 		try{
 			EntityManager em = emf.createEntityManager();
 			Actor actorGet = em.find(Actor.class, a.getIdactor());
@@ -100,9 +117,13 @@ public class ServiceActor {
 			em.getTransaction().commit();
 			em.close();
 			emf.close();
+			response.put("success", "Actor modificado con éxito.");
+			return response;
 		}
 		catch(Exception e){
 			e.printStackTrace();
+			response.put("danger", "Actor no modificado.");
+			return response;
 		}
 	}
 }

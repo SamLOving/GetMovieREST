@@ -5,11 +5,11 @@ app.service("serviceDirector", function ($http) {
         $http.post("http://localhost:8080/GetMovieREST/servicios/director/crear", director).then(
             function (response) {
                 console.log("Exito al crear director servicio")
-                exito("Se ha creado el director")
+                exito(response.data)
             }
             , function (response) {
                 console.log("Error al crear director servicio" + response.statusText)
-                error("No se pudo crear el director, verifique los datos ingresados")
+                error(response.data)
             }
         )
     };
@@ -17,11 +17,11 @@ app.service("serviceDirector", function ($http) {
         $http.put("http://localhost:8080/GetMovieREST/servicios/director/modificar", director).then(
             function (response) {
                 console.log("Exito al modificar director servicio")
-                exito("Se ha modificado el director")
+                exito(response.data)
             }
             , function (response) {
                 console.log("Error al modificar director servicio")
-                error("No se pudo modificar el director, ingrese correctamente los datos")
+                error(response.data)
             }
         )
     };
@@ -33,7 +33,7 @@ app.service("serviceDirector", function ($http) {
             }
             , function (response) {
                 console.log("Error al buscar director servicio")
-                error("No se pudo encontrar algun director")
+                error(response.data)
             }
         )
     };
@@ -41,11 +41,11 @@ app.service("serviceDirector", function ($http) {
         $http.delete("http://localhost:8080/GetMovieREST/servicios/director/eliminar?id="+id).then(
             function (response) {
                 console.log("Exito al eliminar director servicio")
-                exito("Se ha eliminado el director")
+                exito(response.data)
             }
             , function (response) {
                 console.log("Error " + response)
-                error("No se pudo eliminar el director")
+                error(response.data)
             }
         )
     };
@@ -57,8 +57,8 @@ app.service("serviceDirector", function ($http) {
             }
             , function (response) {
                 console.log("Error al eliminar director servicio" )
-                error("error al listar")
+                error(response.data)
             }
         )
     };
-});
+});s

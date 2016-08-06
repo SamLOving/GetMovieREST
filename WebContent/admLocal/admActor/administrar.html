@@ -79,3 +79,8 @@
 		</div>
 	</div>
 </div>
+<div class="appMsg">
+		<div uib-alert ng-repeat="alert in alerts"
+			ng-class="'alert-' + (alert.type || 'warning')"
+			close="closeAlert($index)">{{alert.msg}}</div>
+</div>

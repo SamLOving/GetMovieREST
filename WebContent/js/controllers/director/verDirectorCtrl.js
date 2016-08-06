@@ -1,5 +1,6 @@
 var app = angular.module("getmovieApp");
-app.controller("verDirectorCtrl", function($scope, $route, $filter, serviceDirector) {
+app.controller("verDirectorCtrl", function($scope, $route, $filter,
+		serviceDirector, $timeout) {
 	$scope.Director = {
 		iddirector : 0,
 		nombredirector : "",
@@ -9,18 +10,21 @@ app.controller("verDirectorCtrl", function($scope, $route, $filter, serviceDirec
 	}
 	$scope.buscar = function() {
 		console.log("Current Params: " + $route.current.params.id);
-		serviceDirector.buscarDirector($route.current.params.id, function(director){
-			if (director == ""){
+		serviceDirector.buscarDirector($route.current.params.id, function(
+				director) {
+			if (director == "") {
 				$scope.$location.path('/Director/home').replace();
-			}else {
+			} else {
 				$scope.Director.nombredirector = director.nombredirector;
 				$scope.Director.genero = director.genero;
-				$scope.Director.nacimiento = director.nacimiento;
+				$scope.Director.nacimiento = new Date(director.nacimiento);
 				$scope.Director.fotodirector = director.fotodirector;
 				$scope.Director.iddirector = director.iddirector;
 			}
-		}, function(){
+		}, function() {
 			console.log("error " + msgError);
-			$scope.addAlert("danger","Error Interno! Consulte con el administrador.");
-		})}
+			$scope.addAlert("danger",
+					"Error Interno! Consulte con el administrador.");
+		})
+	}
 });

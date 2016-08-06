@@ -20,8 +20,7 @@ app.controller("verActorCtrl", function ($scope, $route, $filter, serviceActor) 
             } else {
                 $scope.actor.nombreactor = actor.nombreactor;
                 $scope.actor.genero = actor.genero;
-                $scope.actor.nacimiento = actor.nacimiento;
-                
+                $scope.actor.nacimiento = new Date(actor.nacimiento);            
                 $scope.actor.oscars = actor.oscars;
                 $scope.actor.fotoactor = actor.fotoactor;
                 $scope.actor.idactor = actor.idactor;

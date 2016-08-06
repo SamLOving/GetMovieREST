@@ -34,7 +34,7 @@
 				nacimiento</label>
 			<div class="col-lg-10 col-md-10">
 				<div class="col-lg-11">
-					<input type="text" class="form-control" id="fecha" name="fecha"
+					<input type="date" class="form-control" id="fecha" name="fecha"
 						ng-model="Director.nacimiento" placeholder="yyyy-mm-dd" required>
 				</div>
 				<div class="col-lg-1">
@@ -70,6 +70,9 @@
 		<div>
 			<button type="button" ng-click="modificar()" class="btn btn-primary" data-container="body"
 				data-toggle="popover" data-placement="top">Modificar</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a class="btn btn-primary" data-container="body"
+				data-toggle="popover" data-placement="top" href="#/Director/home">Volver</a>
 		</div>
 	</fieldset>
 </form>
