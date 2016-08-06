@@ -1,70 +1,71 @@
 <ul class="breadcrumb">
-	<li><a href="#/">Home</a>
-	<li><a href="#/Genero/home">G&eacute;nero</a></li>
-	<li class="active">Modificar</li>
+    <li><a href="#/">Home</a>
+    <li><a href="#/Genero/home">G&eacute;nero</a></li>
+    <li class="active">Modificar</li>
 </ul>
 <form class="form-horizontal" method="put" action=""
-	name="generoRegistrarForm" data-ng-init="init()">
-	<fieldset>
-		<legend>Modificar G&eacute;nero</legend>
-		<div class="form-group">
-			<label for="nombreGenero" class="col-lg-2 col-md-2 control-label">Nombre</label>
-			<div class="col-lg-10 col-md-10">
-				<div class="col-lg-11">
-					<input type="text" class="form-control" id="nombreGenero"
-						name="nombreGenero" ng-model="genero.nombregenero"
-						placeholder="Nombre de G&eacute;nero" pattern=".{0,50}" required>
-				</div>
-				<div class="col-lg-1">
-					<span class="msgError"
-						ng-show="generoRegistrarForm.nombreGenero.$error.required">(*)</span>
-				</div>
-				<div class="col-lg-11">
-					<div class="alert alert-dismissible alert-danger"
-						ng-show="generoRegistrarForm.nombreGenero.$error.pattern">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Error!</strong> El nombre del G&eacute; debe tener un
-						m&aacute; ximo de 50 caracteres.
-					</div>
-				</div>
-			</div>
-		</div>
+      name="generoRegistrarForm" data-ng-init="init()">
+    <fieldset>
+        <legend>Modificar G&eacute;nero</legend>
+        <div class="form-group">
+            <label for="nombreGenero" class="col-lg-2 col-md-2 control-label">Nombre</label>
+            <div class="col-lg-10 col-md-10">
+                <div class="col-lg-11">
+                    <input type="text" class="form-control" id="nombreGenero"
+                           name="nombreGenero" ng-model="genero.nombregenero"
+                           placeholder="Nombre de G&eacute;nero" pattern=".{0,50}" required>
+                </div>
+                <div class="col-lg-1">
+                    <span class="msgError"
+                          ng-show="generoRegistrarForm.nombreGenero.$error.required">(*)</span>
+                </div>
+                <div class="col-lg-11">
+                    <div class="alert alert-dismissible alert-danger"
+                         ng-show="generoRegistrarForm.nombreGenero.$error.pattern">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Error!</strong> El nombre del G&eacute; debe tener un
+                        m&aacute; ximo de 50 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<div class="form-group">
-			<label for="textArea" class="col-lg-2 control-label">Descripci&oacute;n</label>
-			<div class="col-lg-10 col-md-10">
-				<div class="col-lg-11">
-					<textarea class="form-control" rows="3" id="textArea"
-						name="descripcionGenero" required pattern=".{0,250}"
-						title="&Uacute;nicamente se admiten 205 caracteres"
-						ng-model="genero.descripciongenero"></textarea>
+        <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Descripci&oacute;n</label>
+            <div class="col-lg-10 col-md-10">
+                <div class="col-lg-11">
+                    <textarea class="form-control" rows="3" id="textArea"
+                              name="descripcionGenero" required pattern=".{0,250}"
+                              title="&Uacute;nicamente se admiten 205 caracteres"
+                              ng-model="genero.descripciongenero"></textarea>
 
-				</div>
-				<div class="col-lg-1">
+                </div>
+                <div class="col-lg-1">
 
-					<span class="msgError"
-						ng-show="generoRegistrarForm.descripcionGenero.$error.required">(*)</span>
-				</div>
-				<div class="col-lg-11">
-					<div class="alert alert-dismissible alert-danger"
-						ng-show="generoRegistrarForm.descripcionGenero.$error.pattern">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Error!</strong> No puede ingresar m&aacute;s de 250
-						caracteres.
-					</div>
-				</div>
-			</div>
+                    <span class="msgError"
+                          ng-show="generoRegistrarForm.descripcionGenero.$error.required">(*)</span>
+                </div>
+                <div class="col-lg-11">
+                    <div class="alert alert-dismissible alert-danger"
+                         ng-show="generoRegistrarForm.descripcionGenero.$error.pattern">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Error!</strong> No puede ingresar m&aacute;s de 250
+                        caracteres.
+                    </div>
+                </div>
+            </div>
 
-		</div>
+        </div>
 
-		<div>
-			<button class="btn btn-primary" data-container="body"
-				data-toggle="popover" data-placement="top" ng-click="modificar()">Modificar</button>
-		</div>
-	</fieldset>
+        <div>
+            <button type="button" class="btn btn-primary" data-container="body"
+                    data-toggle="popover" data-placement="top" ng-click="modificar()">Modificar</button>
+            <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="top" href="#/Genero/administrar">Regresar</a>
+        </div>
+    </fieldset>
 </form>
 <div class="appMsg">
-	<div uib-alert ng-repeat="alert in alerts"
-		ng-class="'alert-' + (alert.type || 'warning')"
-		close="closeAlert($index)">{{alert.msg}}</div>
+    <div uib-alert ng-repeat="alert in alerts"
+         ng-class="'alert-' + (alert.type || 'warning')"
+         close="closeAlert($index)">{{alert.msg}}</div>
 </div>

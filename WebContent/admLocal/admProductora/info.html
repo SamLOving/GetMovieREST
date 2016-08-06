@@ -47,13 +47,13 @@
         </div>
 
         <div>
-            <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="top" href="../admProductora/administrar.html">Regresar</a>
+            <a class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="top" href="#/Productora/administrar">Regresar</a>
         </div>
     </fieldset>
 </form>
 
 <div class="appMsg">
-		<div uib-alert ng-repeat="alert in alerts"
-			ng-class="'alert-' + (alert.type || 'warning')"
-			close="closeAlert($index)">{{alert.msg}}</div>
+    <div uib-alert ng-repeat="alert in alerts"
+         ng-class="'alert-' + (alert.type || 'warning')"
+         close="closeAlert($index)">{{alert.msg}}</div>
 </div>

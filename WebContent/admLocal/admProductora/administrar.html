@@ -1,78 +1,74 @@
 <ul class="breadcrumb">
-	<li><a href="#/">Home</a>
-	<li><a href="#/Productora/home">Productora</a></li>
-	<li class="active">Administrar</li>
+    <li><a href="#/">Home</a>
+    <li><a href="#/Productora/home">Productora</a></li>
+    <li class="active">Administrar</li>
 </ul>
 <form name="productoraAdminForm">
-	<fieldset>
-		<legend>Administraci&oacute;n de Productora</legend>
-		<div class="form-group">
-			<label for="nombreProductora" class="col-lg-2 col-md-2 control-label">Nombre
-				de Productora</label>
-			<div class="col-lg-10 col-md-10">
-				<div class="col-lg-11">
-					<input type="text" class="form-control" id="nombreProductora"
-						name="nombreProductora" ng-model="nombreproductora"
-						placeholder="Nombre de Productora" pattern=".{0,50}" required>
-				</div>
-				<div class="col-lg-1">
-					<span class="msgError"
-						ng-show="productoraAdminForm.nombreProductora.$error.required">(*)</span>
-				</div>
-				<div class="col-lg-11">
-					<div class="alert alert-dismissible alert-danger"
-						ng-show="productoraAdminForm.nombreProductora.$error.pattern">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Error!</strong> El nombre de la Productora debe tener un
-						m&aacute;ximo de 50 caracteres.
-					</div>
-				</div>
-			</div>
-		</div>
-	</fieldset>
-	<button class="btn btn-primary" data-container="body"
-		data-toggle="popover" data-placement="top" ng-click="listar()">Buscar</button>
+    <fieldset>
+        <legend>Administraci&oacute;n de Productora</legend>
+        <div class="form-group">
+            <label for="nombreProductora" class="col-lg-2 col-md-2 control-label">Nombre
+                de Productora</label>
+            <div class="col-lg-10 col-md-10">
+                <div class="col-lg-11">
+                    <input type="text" class="form-control" id="nombreProductora"
+                           name="nombreProductora" ng-model="nombreproductora"
+                           placeholder="Nombre de Productora" pattern=".{0,50}">
+                </div>
+                <div class="col-lg-11">
+                    <div class="alert alert-dismissible alert-danger"
+                         ng-show="productoraAdminForm.nombreProductora.$error.pattern">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Error!</strong> El nombre de la Productora debe tener un
+                        m&aacute;ximo de 50 caracteres.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <button class="btn btn-primary" data-container="body"
+            data-toggle="popover" data-placement="top" ng-click="listar()">Buscar</button>
 </form>
 <div class="formclass" data-ng-init="init()">
-	<div class="row">
-		<div class="col-xs-12">
-			<table class="table table-striped table-hover ">
-				<thead>
-					<tr>
-						<th class="col-xs-11">Nombre</th>
-						<th class="col-xs-1">Acci&oacute;n</th>
-					</tr>
-				</thead>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th class="col-xs-11">Nombre</th>
+                        <th class="col-xs-1">Acci&oacute;n</th>
+                    </tr>
+                </thead>
 
-				<tbody>
-					<tr ng-repeat="p in productoras">
-						<td>{{p.nombreproductora}}</td>
-						<td>
-								<a class="btn btn-default" name="productoraModificar"
-									href="#Productora/modificar/{{p.idproductora}}"> <span
-									class="material-icons md-16">&#xE150;</span>
-								</a>
-							
-						</td>
-						<td>
-								<a type="button" class="btn btn-default"
-									href="#Productora/eliminar/{{p.idproductora}}">
-									<i class="material-icons md-16">&#xE872;</i>
-								</a>
-							
-						</td>
-						<td><a class="btn btn-default" 
-									href="#Productora/info/{{p.idproductora}}"> <i class="material-icons">&#xE8F4;</i>
-								</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+                <tbody>
+                    <tr ng-repeat="p in productoras">
+                        <td>{{p.nombreproductora | uppercase}}</td>
+                        <td>
+                            <a class="btn btn-default" name="productoraModificar"
+                               href="#Productora/modificar/{{p.idproductora}}"> <span
+                                                                                      class="material-icons md-16">&#xE150;</span>
+                            </a>
+
+                        </td>
+                        <td>
+                            <a type="button" class="btn btn-default"
+                               href="#Productora/eliminar/{{p.idproductora}}">
+                                <i class="material-icons md-16">&#xE872;</i>
+                            </a>
+
+                        </td>
+                        <td><a class="btn btn-default" 
+                               href="#Productora/info/{{p.idproductora}}"> <i class="material-icons">&#xE8F4;</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div class="appMsg">
-	<div uib-alert ng-repeat="alert in alerts"
-		ng-class="'alert-' + (alert.type || 'warning')"
-		close="closeAlert($index)">{{alert.msg}}</div>
+    <div uib-alert ng-repeat="alert in alerts"
+         ng-class="'alert-' + (alert.type || 'warning')"
+         close="closeAlert($index)">{{alert.msg}}</div>
 </div>
